@@ -17,12 +17,6 @@ defaults:
 jobs:
   build:
     runs-on: self-hosted
-    container:
-      image: ecceps-docker-test-local.artifactory.dbgcloud.io/rhel8-ubi/rhel8-ubi-python:3.11.9-4
-      options: --user root
-      credentials:
-        username: ${{ secrets.ARTIFACTORY_API_USER }}
-        password: ${{ secrets.ARTIFACTORY_API_TOKEN }}
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v4
@@ -60,7 +54,7 @@ jobs:
       id-token: write
     if: github.ref == 'refs/heads/master'
     environment:
-      name: github-pages
+      name: github_pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: self-hosted
     steps:
