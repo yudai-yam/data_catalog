@@ -21,8 +21,15 @@ jobs:
       - name: Checkout the repo
         uses: actions/checkout@v4
 
-      - name: Update pip
+      - name: Upgrade pip
         run: python3 -m pip install --upgrade pip
+
+      - name: Set up Python
+        # This is the version of the action for setting up Python, not the Python version.
+        uses: actions/setup-python@v5
+        with:
+          # Semantic version range syntax or exact version of a Python version
+          python-version: '3.11'
 
       - name: Install Dependencies
         run: pip install -e .[dev]
