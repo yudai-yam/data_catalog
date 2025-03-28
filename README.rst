@@ -5,7 +5,7 @@ Data Catalog Generation API Readme
 
 General Information
 -------------------
-- Data catalog page: https://pages.github.com/yudai-yam/data_catalog
+- Data catalog page: https://yudai-yam.github.io/data_catalog/
 - Source Code: https://github.com/yudai-yam/data_catalog
 
 Short Description / Background
