@@ -1,7 +1,6 @@
 # import os
 from pathlib import Path
 
-
 inputs_folder = Path(__file__).parents[2] / "inputs"
 
 target_columns = {
