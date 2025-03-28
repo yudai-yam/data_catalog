@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Dependencies
-        run: pip install --system -e .[dev]
+        run: pip install -e .[dev]
 
       - name: run black
         run: tox -e black
