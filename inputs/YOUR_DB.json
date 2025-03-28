@@ -1,8 +1,11 @@
 {
-  "TABLE_1": {
-    "author": null,
-    "description": null,
-    "comments": null,
+  "YOUR_TABLE_1": {
+    "author": "Olivia Rodriguez",
+    "description": "this is a dummy table for demo purpose",
+    "comments": [
+        "domo table",
+        "all the data is made up"
+    ],
     "regression_test_config": {
       "comparison_key": [
         "RPT_DATE",
@@ -20,7 +23,7 @@
       },
       {
         "column_name": "CURRENCY",
-        "comments": null,
+        "comments": "a currency for exchange",
         "data_type": "VARCHAR2"
       },
       {
@@ -65,10 +68,12 @@
       }
     ]
   },
-  "MY_GOOD_TABLE": {
-    "author": "Obama Mubarak",
-    "description": null,
-    "comments": null,
+  "YOUR_SECOND_TABLE": {
+    "author": "Michael Zimmerman",
+    "description": "a good table",
+    "comments": [
+        "nice one"
+    ],
     "regression_test_config": {
       "comparison_key": [
         "RPT_DATE",
@@ -117,31 +122,6 @@
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "LOC_ID",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "POOLID",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "REFERENCE",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "RELATED_RPT_NAME",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "RPT_DATE",
-        "comments": null,
-        "data_type": "DATE"
-      },
-      {
         "column_name": "RUN",
         "comments": null,
         "data_type": "VARCHAR2"
@@ -168,7 +148,7 @@
       }
     ]
   },
-  "ADJUSTED_EXCHANGE_RATES": {
+  "CONFIDENTIAL_TABLE": {
     "author": "Yudai Yamase",
     "description": "To get the end of day exchange rates",
     "comments": [
@@ -211,11 +191,6 @@
       {
         "column_name": "EXCHRAT",
         "comments": "exchange rate",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "HAIRCUTPCNT",
-        "comments": "conversion factor to convert target currency from source currency",
         "data_type": "NUMBER"
       },
       {
@@ -276,7 +251,7 @@
       }
     ]
   },
-  "COLLATERAL": {
+  "YOU_ROCK_TABLE": {
     "author": "Yudai Yamase",
     "description": "Get EUA and Guarantee collateral",
     "comments": "- basic approach is done done like for the dms_daily_balances view but we filter for eua and guarantee collateral entries - currency conversion is done with the unadjusted exchange rate found prior to fact_date - guarantee values are already monetary values, so a price of 1 is used there but EUA balance represents the number of certificates, settlement prices are used   in order to determine the value. - as price, we take the maximum price found for the product_code `SEME` because other prices are given, but they are only 0.01",

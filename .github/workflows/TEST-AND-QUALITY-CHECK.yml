@@ -2,8 +2,8 @@ name: TEST-AND-QUALITY-CHECK
 
 on:
   push:
-    # branches:
-    #   - master
+    branches:
+      - master
   pull_request:
     branches:
       - master
