@@ -5,8 +5,8 @@ Data Catalog Generation API Readme
 
 General Information
 -------------------
-- Data catalog page: https://pages.github.deutsche-boerse.de/EXG-dev-confidential/exg.app.ers.data_catalog
-- Source Code: https://github.deutsche-boerse.de/EXG-dev-confidential/exg.app.ers.data_catalog
+- Data catalog page: https://pages.github.com/yudai-yam/data_catalog
+- Source Code: https://github.com/yudai-yam/data_catalog
 
 Short Description / Background
 ------------------------------
@@ -29,7 +29,7 @@ Project Structure
 
     ers.data_catalog
     ├── src
-    │   ├──bdwh_extract
+    │   ├──extract
     │   │    ├── utils
     │   │    ├── .env
     │   │    ├── config.py
@@ -46,9 +46,9 @@ Project Structure
     └── inputs
 
 
-bdwh_extract
+extract
 ^^^^^^^^^^^^
-Contains scripts for extracting data from BDWH database as a JSON file.
+Contains scripts for extracting data from a database as a JSON file.
 
 data_catalog
 ^^^^^^^^^^^^
@@ -67,7 +67,7 @@ Inputs Directory
 ----------------
 This is where JSON files extracted from DB are stored.
 This data catalog creates HTML pages based on those JSON files.
-The location must be ``exg.app.ers.data_catalog/inputs``.
+The location must be ``~/inputs``.
 The naming of the file must follow the convention of ``<name of db>.json``.
 
 Installation
