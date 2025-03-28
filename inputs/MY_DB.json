@@ -1,0 +1,339 @@
+{
+  "TABLE_1": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "EXCHANGE_MEMBER",
+        "CURRENCY",
+        "ACCOUNT"
+      ],
+      "where_query": "dummy query"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FLXCNTRID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VMAR_MTD_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VMAR_NET_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VMAR_PAY_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VMAR_PRV_MTH_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VMAR_RCV_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VMAR_YTD_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "EOD_DAILY_CASH_ACCOUNT_CM": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "ACCOUNT",
+        "REFERENCE",
+        "POOLID",
+        "TRAN_TYPE",
+        "CASH_INST_ID",
+        "RUN",
+        "CLEARING_MEMBER",
+        "VALUE_DATE",
+        "TYPE_DESCRIPTION",
+        "INSTRUCTION_STATUS"
+      ],
+      "where_query": "this is a where query"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CASH_INST_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CHI",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DEBIT_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "INSTRUCTION_STATUS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "LOC_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "REFERENCE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RELATED_RPT_NAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RUN",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRAN_TYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TXN_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TYPE_DESCRIPTION",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VALUE_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      }
+    ]
+  },
+  "ADJUSTED_EXCHANGE_RATES": {
+    "author": "Yudai Yamase",
+    "description": "To get the end of day exchange rates",
+    "comments": [
+      "comment_1",
+      "comment_2",
+      "comment_3"
+    ],
+    "regression_test_config": {
+      "comparison_key": [
+        "TRANDAT",
+        "CURRTYPCOD",
+        "EURCURRTYPCOD"
+      ],
+      "columns_to_ignore": [
+        "IMPTIM"
+      ],
+      "where_query": "date = today()"
+    },
+    "columns": [
+      {
+        "column_name": "ADJEXCHRATCRED",
+        "comments": "credit exchange rates",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJEXCHRATDEB",
+        "comments": "debit exchange rates",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": "source currency code",
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EURCURRTYPCOD",
+        "comments": "target currency code",
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHRAT",
+        "comments": "exchange rate",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "HAIRCUTPCNT",
+        "comments": "conversion factor to convert target currency from source currency",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "IMPTIM",
+        "comments": "Import time when the record has been inserted",
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "TRANDAT",
+        "comments": "transaction date",
+        "data_type": "DATE"
+      }
+    ]
+  },
+  "CALENDAR": {
+    "author": "Yudai Yamase",
+    "description": "Provide the business day calendar",
+    "comments": [
+      "this is based in Germany",
+      "regional holidays included"
+    ],
+    "regression_test_config": {
+      "comparison_key": [
+        "FACT_DATE"
+      ],
+      "where_query": "fact_date > trunc(sysdate) - 10 and fact_date < trunc(sysdate) - 10"
+    },
+    "columns": [
+      {
+        "column_name": "CALENDAR_WEEK",
+        "comments": "Number of the current calendar week",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "DAY_COMMENT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DAY_IN_YEAR",
+        "comments": "Consecutive numbering of days in a year",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ECC_BUSINESS_DAY",
+        "comments": "1 indicates that the current date is an ECC business day, else 0",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "FACT_DATE",
+        "comments": "Day for which information is provided",
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "WEEKDAY",
+        "comments": "Name of the weekday",
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "WEEKDAY_INDEX",
+        "comments": "Numerical representation of the weekday, starting with 1 at Monday till 7 on Sunday",
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "COLLATERAL": {
+    "author": "Yudai Yamase",
+    "description": "Get EUA and Guarantee collateral",
+    "comments": "- basic approach is done done like for the dms_daily_balances view but we filter for eua and guarantee collateral entries - currency conversion is done with the unadjusted exchange rate found prior to fact_date - guarantee values are already monetary values, so a price of 1 is used there but EUA balance represents the number of certificates, settlement prices are used   in order to determine the value. - as price, we take the maximum price found for the product_code `SEME` because other prices are given, but they are only 0.01",
+    "regression_test_config": {
+      "comparison_key": [
+        "FACT_DATE",
+        "DELIVERY_ACCOUNT",
+        "COMMODITY"
+      ],
+      "where_query": ""
+    },
+    "columns": [
+      {
+        "column_name": "CURRENT_BALANCE",
+        "comments": "Current balance of the associated commodity",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRENT_MARKET_VALUE_EURO",
+        "comments": "Current balance times price in Euro",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRENT_MARKET_VALUE_ORIGINAL",
+        "comments": "Current balance times price in original currency.",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "DELIVERY_ACCOUNT",
+        "comments": "Identifier of the account which held the balances",
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FACT_DATE",
+        "comments": "Date for which balance was valid",
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "NO_SOURCE_DATA",
+        "comments": "A 0 indicates that the entry can be found in the source data. A 1 indicates that the last previously available previous date point was used",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRICE_ORIGINAL",
+        "comments": "Price in original currency. For EUA: price of product code SEME, for Guarantee: 1",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PROJECTED_BALANCE",
+        "comments": "Balance taking upcoming transactions into account",
+        "data_type": "NUMBER"
+      }
+    ]
+  }
+}
