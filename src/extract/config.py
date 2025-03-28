@@ -1,4 +1,4 @@
-import os
+# import os
 from pathlib import Path
 
 
@@ -11,35 +11,35 @@ target_columns = {
 }
 
 
-def read_config() -> AppConfiguration:
-    """
-    read configurations from env and assign it to a variable
+# def read_config() -> AppConfiguration:
+#     """
+#     read configurations from env and assign it to a variable
 
-    Returns:
-        AppConfiguration
-    """
+#     Returns:
+#         AppConfiguration
+#     """
 
-    config = AppConfiguration()
+#     config = AppConfiguration()
 
-    config["engine"] = create_engine_for_bdwh(
-        username=os.getenv("USER"),
-        password=os.getenv("PASSWORD"),
-        host=os.getenv("HOST"),
-        port=os.getenv("PORT"),
-        service_name=os.getenv("SERVICE_NAME"),
-    )
+#     config["engine"] = create_engine_for_bdwh(
+#         username=os.getenv("USER"),
+#         password=os.getenv("PASSWORD"),
+#         host=os.getenv("HOST"),
+#         port=os.getenv("PORT"),
+#         service_name=os.getenv("SERVICE_NAME"),
+#     )
 
-    config["connection"] = config["engine"].connect()
+#     config["connection"] = config["engine"].connect()
 
-    config["session"] = sessionmaker(config["connection"])()
+#     config["session"] = sessionmaker(config["connection"])()
 
-    config.add_parameter_from_env("owner", "OWNER", sanitize_schema)
+#     config.add_parameter_from_env("owner", "OWNER", sanitize_schema)
 
-    config["db_name"] = os.getenv("DB_NAME")
-    config["target_fields"] = os.getenv("TARGET_FIELDS")
-    config["target_tables"] = os.getenv("TARGET_TABLES")
+#     config["db_name"] = os.getenv("DB_NAME")
+#     config["target_fields"] = os.getenv("TARGET_FIELDS")
+#     config["target_tables"] = os.getenv("TARGET_TABLES")
 
-    return config
+#     return config
 
 
 def sanitize_schema(value: str) -> str:
