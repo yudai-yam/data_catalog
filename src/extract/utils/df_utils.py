@@ -34,4 +34,10 @@ def to_json_list(df: pd.DataFrame) -> list:
 
 
 def clean(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    replace the \n into a space
+
+    Returns:
+    cleaned dataframe
+    """
     return df.replace(r"\n", " ", regex=True)

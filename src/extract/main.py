@@ -42,7 +42,7 @@ def load_configuration():
 
 def extract():
     """
-    extract data from BDWH tables
+    extract data from tables
     """
     logging.basicConfig(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
