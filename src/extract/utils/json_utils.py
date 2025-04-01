@@ -79,7 +79,7 @@ def rename_keys(key_map: dict, original_dict: dict) -> dict:
     Args:
         key_map: a mapping from old key to new key
         original_dict: a dictionary whose keys will be repalced accordingly
-    
+
     Returns:
         a dict with renamed keys
     """
