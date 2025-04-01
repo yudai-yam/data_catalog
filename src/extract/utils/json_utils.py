@@ -73,7 +73,16 @@ def write_to_file(file_path: Path, content: OrderedDict):
 
 
 def rename_keys(key_map: dict, original_dict: dict) -> dict:
+    """
+    rename the key based on the key_map
 
+    Args:
+        key_map: a mapping from old key to new key
+        original_dict: a dictionary whose keys will be repalced accordingly
+
+    Returns:
+        a dict with renamed keys
+    """
     renamed_dict = {}
     for key, value in original_dict.items():
         key = key.lower()

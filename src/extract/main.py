@@ -42,7 +42,7 @@ def load_configuration():
 
 def extract():
     """
-    extract data from BDWH tables
+    extract data from tables
     """
     logging.basicConfig(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -58,14 +58,14 @@ def extract():
             "all_col_comments",
             schema,
             config["connection"],
-            config["bdwh_owner"],
+            config["owner"],
         )
 
         result_column_types = extract_and_query_table(
             "all_tab_columns",
             schema,
             config["connection"],
-            config["bdwh_owner"],
+            config["owner"],
         )
 
         columns_df = pd.merge(
@@ -80,7 +80,7 @@ def extract():
             "all_tab_comments",
             schema,
             config["connection"],
-            config["bdwh_owner"],
+            config["owner"],
         )
         overviews_json_list = json_utils.sanitize_overviews(
             df_utils.to_json_list(overviews_df), json.loads(config["target_fields"])
