@@ -1,0 +1,22 @@
+# Byte-compiled
+__pycache__/
+
+# Distribution / packaging
+*.egg-info/
+*.egg
+
+# Unit test
+.pytest_cache/
+
+# Environments
+.env
+venv/
+.venv/
+
+# PyCharm
+.idea/
+
+# Documents and its resources
+.doctree/
+rst_source/
+docs/

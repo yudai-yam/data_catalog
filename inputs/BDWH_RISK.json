@@ -1,0 +1,6973 @@
+{
+  "RISK_V_ADJUSTED_EXCHANGE_RATES": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "To get the end of day exchange rates",
+    "comments": "- Always uses the currency from the previous day as the current day is not available or MAX date.",
+    "regression_test_config": {
+      "comparison_key": [
+        "TRANDAT",
+        "CURRTYPCOD",
+        "EURCURRTYPCOD"
+      ],
+      "columns_to_ignore": [
+        "IMPTIM"
+      ],
+      "where_query": "trandat in (select distinct trandat from dal_risk_o.risk_v_adjusted_exchange_rates order by trandat desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "ADJEXCHRATCRED",
+        "comments": "credit exchange rates",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJEXCHRATDEB",
+        "comments": "debit exchange rates",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": "source currency code",
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EURCURRTYPCOD",
+        "comments": "target currency code",
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHRAT",
+        "comments": "exchange rate",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "HAIRCUTPCNT",
+        "comments": "conversion factor to convert target currency from source currency",
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "IMPTIM",
+        "comments": "Import time when the record has been inserted",
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "TRANDAT",
+        "comments": "transaction date",
+        "data_type": "DATE"
+      }
+    ]
+  },
+  "RISK_V_ALL_POS_DELIVERY_OPEN": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "This is an outdated view and not used anymore.",
+    "comments": "Shows the the snapshot of the positions and no more details.",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "MEMBCLGIDCOD",
+        "MEMBEXCHIDCOD",
+        "CURRTYPCOD",
+        "ACCTTYPGRP",
+        "PRODID",
+        "CNTREXPYRDAT",
+        "CNTREXPMTHDAT"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "ACCTTYPGRP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ENDE_DATUM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "MEMBCLGIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POSNNETBAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "SUMTRNLNGQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SUMTRNSHTQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_AUCTION_CALENDAR": {
+    "author": "Marc Kullmann (Risk DEV)",
+    "description": "Provides the auction days for EEX and EPEX Spot",
+    "comments": "Use the view to get the auction days for EEX and EPEX Spot auctions",
+    "regression_test_config": {
+      "comparison_key": [
+        "AUCTIONING_MONTH",
+        "PRODUCT",
+        "LIMIT_DEFINITION",
+        "CLOSURE_OF_ORDER_BOOK"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "AUCTIONING_MONTH",
+        "comments": "Date and Year for which the limit definition has its auction day.",
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLOSURE_OF_ORDER_BOOK",
+        "comments": "The Auction Closure or auction day for the Limit Definition.",
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "LIMIT_DEFINITION",
+        "comments": "The Limit Definition which has its auction closure.",
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT",
+        "comments": "The product to which the Limit Definition belongs.",
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_BOM_CASCADING_DATA": {
+    "author": "Stuti Sanghavi (Risk DEV)",
+    "description": "Provide BOM Cascading Data from ECC Website",
+    "comments": "- Used for AMBO Implementation to get the remaining_contract_size",
+    "regression_test_config": {
+      "comparison_key": [
+        "FACT_DATE",
+        "FILENAME",
+        "PROCESS_DATE",
+        "CONTRACT_SIZE"
+      ],
+      "columns_to_ignore": [
+        "ITS",
+        "FACT_ID",
+        "FACT_TIMESTAMP"
+      ],
+      "where_query": "fact_date in (select distinct fact_date from dal_risk_o.risk_v_bom_cascading_data order by fact_date desc fetch  first 3 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "CONTRACT_SIZE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "DELIVERY_SIZE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "FACT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "FACT_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "FACT_TIMESTAMP",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "FILENAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ITS",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "MATURITY",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "PROCESS_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "PRODUCT_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "REMAINING_SIZE",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_CLEARER_CHANGE": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Provide CM-NCM-relation using SMSS hist table",
+    "comments": "- used by MMS for EoD run",
+    "regression_test_config": {
+      "comparison_key": [
+        "MEMBER_ID",
+        "CLEARER_ID_NEW"
+      ],
+      "columns_to_ignore": [
+        "ID"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "CHANGE_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "CLEARER_ID_NEW",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARER_ID_OLD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MEMBER_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_CLOSEOUT_CALC": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Performs Closeout Monitoring for all physically settled products",
+    "comments": "- No input required. Runs closeout on positions for latest fact_date.",
+    "regression_test_config": {
+      "comparison_key": [
+        "NON_CLEARING_MEMBER",
+        "ECC_COMMODITY",
+        "ECC_EXCHANGE",
+        "ECC_DELIVERY_POINT"
+      ],
+      "columns_to_ignore": [
+        "RPT_TIME"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_DELIVERY_POINT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_EXCHANGE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MAX_START_DELIVERY",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "NETQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NON_CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POSITIONS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_CONTRACT_DETAILS": {
+    "author": "Christopher Schmaeche (Risk DEV)",
+    "description": "Provide relevant contract data for Stresstest application",
+    "comments": "- Fact_date required as input - Provides data that can be defined on contract level which is defined by product code, expiry year and expiry month - For futures 'contract' is the same as 'instrument' - For options 'contract' does *not* include call put flag and exercise price - The source table contains data on instrument level, thus option contract data would be duplicated if not filtered, because it is the same for each combination of call put flag and exercise price. In order to deduplicate, we partition by primary key and sort by call_put_flag and exercise_price. Finally we take the first one we find for each primary key.",
+    "regression_test_config": {
+      "comparison_key": [
+        "FACT_DATE",
+        "CONTRACT_CODE"
+      ],
+      "where_query": "fact_date >= trunc(sysdate-1)"
+    },
+    "columns": [
+      {
+        "column_name": "CONTRACT_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CONTRACT_SCALE_FACTOR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CONTRACT_SIZE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRENCY_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DELIVERY_END",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DELIVERY_START",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "EXPIRY_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "FACT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "PRODUCT_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT_LINE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UNDERLYING_CONTRACT_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UNDERLYING_EXPIRY_MONTH",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNDERLYING_EXPIRY_YEAR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNDERLYING_PRODUCT_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_DEPRECATED_MARKTVALUES_MR": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "This is a deprecated view. Combines CurrenyRates, Auction Prices and Settlement Prices.",
+    "comments": "- Since it is an MR view, shows the most recent only",
+    "regression_test_config": {
+      "comparison_key": [
+        "PRODUCT",
+        "SOURCE"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "PRICE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRICE_TIMESTAMP",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "PRODUCT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SOURCE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_DMS_BALANCES": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Get account details for balances",
+    "comments": "- This view gave errors with DAL_REF_DAILY_BALANCES_OFFSET in the schema DAL_IDP_O - This view removes dependency on the DAL_IDP_O.DAL_REF_DAILY_BALANCES_OFFSET",
+    "regression_test_config": {
+      "comparison_key": [
+        "DELIVERY_ACCOUNT",
+        "DAY",
+        "COMMODITY"
+      ],
+      "where_query": "day in (select distinct day from dal_risk_o.risk_v_dms_balances where day < trunc(sysdate) order by day desc fetch  first 6 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DAILY_TOTAL_DELIVERY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "DAILY_TOTAL_TRANSFER",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "DAY",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DELIVERY_ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "NOSOURCEDATA",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RUNNING_TOTAL_ACTUAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RUNNING_TOTAL_PROJECTED",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RUNNING_TOTAL_PROJECTED_FUTURE",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_DMS_DAILY_BALANCES": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "To get daily balances for delivery accounts This view doesnt have any dependency on DAL_IDP_O.DAL_REF_DAILY_BALANCES_OFFSET anymore, instead it uses data from DAL_RISK_O.DAL_SMSS_DMS_DAILY_BALANCES itself",
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "DELIVERY_ACCOUNT",
+        "BOOKKEEPING_DATE",
+        "COMMODITY"
+      ],
+      "where_query": "bookkeeping_date in (select distinct bookkeeping_date from dal_risk_o.risk_v_dms_daily_balances where bookkeeping_date < trunc(sysdate) order by bookkeeping_date desc fetch  first 6 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "BOOKKEEPING_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DAILY_TOTAL_DELIVERY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "DAILY_TOTAL_TRANSFER",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "DELIVERY_ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RUNNING_TOTAL_ACTUAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RUNNING_TOTAL_PROJECTED",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_EEX_BUSINESS_CALENDAR": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "CALENDAR_DEF_CODE",
+        "DAY_DATE",
+        "START_TIME"
+      ],
+      "columns_to_ignore": [
+        "DI_PROC_ID",
+        "ITS",
+        "CALENDAR_DEF_ID",
+        "CHANGE_TIME",
+        "DAY_COMMENT",
+        "DAY_CHANGE_TIME"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "BUSINESS_DAY_IND",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CALENDAR_DEF_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CALENDAR_DEF_DESCR",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CALENDAR_DEF_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CHANGE_TIME",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "DAY_CHANGE_TIME",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "DAY_COMMENT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DAY_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DAY_USER_FLD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DI_PROC_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "END_TIME",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "HOLIDAY_IND",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ITS",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "START_TIME",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "USER_FLD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "WEEKEND_IND",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_EEX_CALENDAR": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "DATUM"
+      ],
+      "columns_to_ignore": [
+        "AENDERUNGSDATUM"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "AENDERUNGSDATUM",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "AENDERUNGSUSER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "BANKARBEITSTAG",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "BESCHREIBUNG",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DATUM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "HANDELSTAG",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "HANDELSTAG_ECC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "KW",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TAG",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "WOCHENTAG",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_EEX_INSTRUMENT": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "PRODUKT_ID",
+        "CNTREXPYRDAT",
+        "CNTREXPMTHDAT"
+      ],
+      "where_query": "start_handel > sysdate -360 and ende_handel < sysdate + 360"
+    },
+    "columns": [
+      {
+        "column_name": "BEGIN_BOM_SETTLEMENT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "BEGIN_EMF",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CONTRACT_EXPIRY",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ENDE_DATUM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ENDE_HANDEL",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ENDE_LIEFERTAG",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "KONTRAKT_VOLUMEN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "LIEFERTAGE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MARKT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUKT_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "START_DATUM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "START_HANDEL",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "START_LIEFERTAG",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "UL_CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UL_CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UL_PRODUKT_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_EEX_PRODUCT": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "SYSTEM",
+        "PRODUKT_ID"
+      ],
+      "where_query": "system = 'EUREX'"
+    },
+    "columns": [
+      {
+        "column_name": "AENDERUNGSDATUM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "AENDERUNGSUSER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "COMBINED_COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CONVERSION_FACTOR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CONVERSION_UNIT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DATUM_BIS_HT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DATUM_VON_HT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DELIVERYPERIODTYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_CONVERSION_UOM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_DELIVERY_POINT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_EXCHANGE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_TRANSACTION_TYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_UOM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EUREX_PROD_GROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EURPRODLINE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHANGE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHANGE_KUNDEN_NR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXERPRCDCML",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "FULFILL_TYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "LOAD_TYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARKET_SEGMENT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MINTRADUNIT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OLS_PRODUCT_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PERIODTYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODGROUP1",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUKT_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RET_COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RET_COMMODITY_SUBTYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RET_MARKET_PLACE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RET_TRADE_REG_ONLY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SETTLTYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SYSTEM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TICKSIZE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNIT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VENUE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "WEBDBPRODGRP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_EOD_DAILY_CASH_ACCOUNT_CM": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "ACCOUNT",
+        "REFERENCE",
+        "POOLID",
+        "TRAN_TYPE",
+        "CASH_INST_ID",
+        "RUN",
+        "CLEARING_MEMBER",
+        "VALUE_DATE",
+        "TYPE_DESCRIPTION",
+        "INSTRUCTION_STATUS"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_eod_daily_cash_account_cm order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CASH_INST_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CHI",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CREDIT_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DEBIT_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "INSTRUCTION_STATUS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "LOC_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "REFERENCE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RELATED_RPT_NAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RUN",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRAN_TYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TXN_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TYPE_DESCRIPTION",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VALUE_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      }
+    ]
+  },
+  "RISK_V_EOD_DAILY_MARGIN": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "CLEARING_MEMBER",
+        "EXCHANGE_MEMBER",
+        "ACCOUNT",
+        "CURRENCY",
+        "MARGIN_GROUP",
+        "MARGIN_CLASS"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_eod_daily_margin order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ADDITIONAL_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURR_LIQ_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FUTURES_SPREAD_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MARGIN_CLASS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARGIN_GROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PREMIUM_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "UNADJ_MARGIN_REQ",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_EOD_DAILY_MARGIN_EUR": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Converts all values to hard-coded EUR (MMS requirement)",
+    "comments": "- Must ALWAYS be used together with a date (since it contains the whole history) - but converts all to EUR - converts all M%, G% P% Accounts to PP (MMS requirement)",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "CLEARING_MEMBER",
+        "EXCHANGE_MEMBER",
+        "ACCOUNT",
+        "CURRENCY",
+        "MARGIN_GROUP",
+        "MARGIN_CLASS"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from DAL_RISK_O.risk_v_eod_daily_margin_eur order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ADDITIONAL_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "CURR_LIQ_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FUTURES_SPREAD_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MARGIN_CLASS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARGIN_GROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PREMIUM_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "UNADJ_MARGIN_REQ",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_EOD_DAILY_SETTL_SURPLUS": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "CLEARING_MEMBER",
+        "CM_CURRENCY",
+        "SURPLUS_CURRENCY",
+        "POOLID"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_eod_daily_settl_surplus order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "ADJ_EXCH_RATE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_GUAR_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_SECU_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CASH_ACCOUNTS_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CM_CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBCLGIDCODFROM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "OVR_UDR_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OVR_UDR_CURRENCY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "REQUIRED_MARGIN_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SURPLUS_CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_EOD_MARGIN_SUMMARY": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "EXCHANGE_MEMBER",
+        "ACCOUNT",
+        "CURRENCY",
+        "POOLID"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_eod_margin_summary order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ADD_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLGCURRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHRAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TOTAL_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TOTMGNCLGCURR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNADJ_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_EOD_POSITION_DETAIL": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "POSITIONID",
+        "UTI",
+        "TRNTYP"
+      ],
+      "columns_to_ignore": [
+        "RPT_SEQ_NO"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_eod_position_detail rpt_date where  rpt_date > trunc (sysdate-14) order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "ACCTTYPGRP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "BUYCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CUST",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FEEBYUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MEMBCLGIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCODOBO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MKTOMKTTICK",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NETQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OPNCLSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRCMBTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGEXCHID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGORDRNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ORIGTRNID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNTIM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ORIGTRNTIM2",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PARTIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POSITIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRMVMARAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RELATEDTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_SEQ_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TEXT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRDMTCHPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNADJSTSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNFEEAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNHISTADJIND",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDSFXNO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNIDSFXNOPNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNLNGQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNSHTQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "USRORDRNUM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UTI",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_EOD_POSITION_TRANS_EUR": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": null,
+    "columns": [
+      {
+        "column_name": "ACCTTYPGRP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "BUYCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CUST",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBCLGIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCODOBO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MKTOMKTTICK",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NETQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OPNCLSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGEXCHID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGORDRNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ORIGTRNID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNTIM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ORIGTRNTIM2",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "PAIR_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PARTIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POSITIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRMVMARAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRMVMARAMNT_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RELATEDTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TEXT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRDMTCHPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDMTCHPRC_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNADJSTSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNGROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNHISTADJIND",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDSFXNO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNIDSFXNOPNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNLNGQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNSHTQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "USRORDRNUM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UTI",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_EOD_SECU_COLLATERAL": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "POOLID",
+        "CURRENCY",
+        "ISIN_COD"
+      ],
+      "columns_to_ignore": [
+        "SERIAL_NO"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_eod_secu_collateral order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CSD_ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CSD_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CSH_ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ISIN_COD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "SECU_BLK_CLT_QTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SECU_COLL_VAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SECU_EVAL_PCT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SECU_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SECU_LST_CLS_PRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SECU_MKT_VAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNUSED_SEC_QTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_EOD_SETTL_PRICES_OI": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "provides settlement prices from MDH for all products (to replace the inside market usage)",
+    "comments": "- MUST always be used with a date - As it one view for options and derivatives, so PRODUCT_LINE can be used to distinguish (F, O, S) - uses always the latest snapshot for the day - IMPORTENT!!! Filter on INST_SETUP_COMPLETE = 1 to get only correct setup products",
+    "regression_test_config": {
+      "comparison_key": [
+        "TRDDAT",
+        "PRODID",
+        "CNTREXPMTHDAT",
+        "CNTREXPYRDAT",
+        "CNTRCLASCOD",
+        "CNTREXERPRC"
+      ],
+      "where_query": "trddat in (select distinct trddat from dal_risk_o.RISK_V_EOD_SETTL_PRICES_OI ESPO_date where trddat > trunc(sysdate -14) order by trddat desc fetch  first 2 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "INST_SETUP_COMPLETE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "LSTSETLPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OPNINT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT_LINE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "STRIKESTRING",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRDDAT",
+        "comments": null,
+        "data_type": "DATE"
+      }
+    ]
+  },
+  "RISK_V_EOD_VMAR_OVERALL_SUM": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "EXCHANGE_MEMBER",
+        "CURRENCY",
+        "ACCOUNT"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_eod_vmar_overall_sum where rpt_date > trunc(sysdate -14) order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FLXCNTRID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VMAR_MTD_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VMAR_NET_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VMAR_PAY_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VMAR_PRV_MTH_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VMAR_RCV_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VMAR_YTD_BAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_EUREX_MEMBER_LIST": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "MEMBER_ID",
+        "VALID_FROM"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "CLEARING_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "IS_CM",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "IS_EUREX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MEMBER_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VALID_FROM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VALID_TO",
+        "comments": null,
+        "data_type": "DATE"
+      }
+    ]
+  },
+  "RISK_V_INSTRUMENTS": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Provide a 1:1 view to dal_instrument",
+    "comments": " Fact_date required as input - Provides all instrument details - for Risk you should filter on 'C7' - ensure to take the last delivery for a day",
+    "regression_test_config": {
+      "comparison_key": [
+        "FACT_DATE",
+        "INSTRUMENT_ID"
+      ],
+      "columns_to_ignore": [
+        "ITS",
+        "SRC_FACT_ID",
+        "BEGIN_EMF",
+        "STATUS"
+      ],
+      "where_query": "fact_date in (select distinct fact_date from dal_risk_o.risk_v_instruments order by fact_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "BEGIN_EMF",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "BOM_START",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "CALL_PUT_FLAG",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_CALENDAR",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "COMBINED_COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CONTRACT_SIZE_SOURCE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CONTRACT_VOLUME",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CONVERSION_FACTOR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CONVERSION_UNIT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DELIVERY_DAY_COUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "DELIVERY_END_SOURCE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DELIVERY_PERIOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DELIVERY_START_SOURCE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ECC_COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_CONVERSION_UNIT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_DELIVERY_POINT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_EXCHANGE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ECC_UNIT_OF_MEASURE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EEX_INSTRUMENT_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EEX_PRODUCT_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EEX_TICK_SIZE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EMISSION_TYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "END_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "END_DELIVERY",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "END_TRADING",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "EUREX_PRODUCT_LINE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXERCISE_PRICE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXERCISE_PRICE_DECIMALS",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXERCISE_STYLE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXPIRY",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "EXPIRY_DATE_SOURCE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "EXP_MONTH",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXP_YEAR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "FACT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "FACT_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ILIQUID_FOR_TRADE_TRANSP_IND",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "INSTRUMENT_CATEGORY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "INSTRUMENT_CODE_EEX",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "INSTRUMENT_CODE_SOURCE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "INSTRUMENT_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ISIN",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ISIN_INSTRUMENT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ISIN_PRODUCT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "IS_SPOT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ITS",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "LFVTD",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "MARGIN_STYLE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARKET",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARKET_AREA",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARKET_IDENTIFIER_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARKET_IDENTIFIER_CODE_SOURCE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARKET_MODEL",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARKET_SEGMENT_IDENTIFIER_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MINIMUM_TRADE_UNIT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NBR_OF_INSTR_LEGS",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ORIGINAL_EXERCISE_PRICE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRICE_DECIMAL_FACTOR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCT_CATEGORY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT_CODE_EEX",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT_CODE_SOURCE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCT_LINE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT_LONGNAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SOURCE_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SRC_FACT_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "START_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "START_DELIVERY",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "START_TRADING",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "STATE_VALID_FROM",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "STATUS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "STRATEGY_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SYSTEM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "T7_INSTR_TYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TICK_SIZE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TICK_VALUE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRADING_CALENDAR",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRADING_END_SOURCE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TRADING_START_SOURCE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "UNDL_EXP_MONTH",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNDL_EXP_YEAR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNDL_PRODUCT_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UNIT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UNIT_OF_MEASURE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VALID_FROM",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "VALID_TO",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "VENUE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_INTRA_DAILY_MARGIN": {
+    "author": "Steffen Kohla (RiskDev)",
+    "description": "Provide Most recent data for DAL_INTRA_DAILY_MARGIN aka CI750",
+    "comments": "- run as is - The source is intraday facttable - it contains several snaphsot a day (identified by RPT_TIME) - we only need the latest RPT_TIME - to speed up the query, a with statement is used, collection the last day (fact_date) once",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "EXCHANGE_MEMBER",
+        "CURRENCY",
+        "ACCOUNT",
+        "MARGIN_GROUP",
+        "MARGIN_CLASS",
+        "CLEARING_MEMBER"
+      ],
+      "columns_to_ignore": [
+        "RPT_TIME",
+        "SERIAL_NO"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ADDITIONAL_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURR_LIQ_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FUTURES_SPREAD_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MARGIN_CLASS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARGIN_GROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PREMIUM_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNADJ_MARGIN_REQ",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_INTRA_DAILY_MARGIN_ALL": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "shows all values + EURO converation",
+    "comments": "- aka CI750 - Must ALWAYS be used together with a date (since it contains the whole history) - pick a shapshot (it containsall shapshotfor the day) - contains all values + euro conversion",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "EXCHANGE_MEMBER",
+        "CLEARING_MEMBER",
+        "CURRENCY",
+        "ACCOUNT",
+        "MARGIN_GROUP",
+        "MARGIN_CLASS"
+      ],
+      "columns_to_ignore": [
+        "SERIAL_NO"
+      ],
+      "where_query": "RPT_DATE in (select distinct rpt_date from dal_risk_o.RISK_V_INTRA_DAILY_MARGIN_ALL where RPT_DATE < trunc (sysdate) order by rpt_date desc fetch  first 2 rows only) and ((RPT_TIME > '080000' and RPT_TIME < '100000') or (RPT_TIME > '130000' and RPT_TIME < '150000') or (RPT_TIME > '170000' and RPT_TIME < '190000'))"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ACCOUNT_SIMPLE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ADDITIONAL_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADDITIONAL_MARGIN_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_RATE_CREDIT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY_EUR",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "CURR_LIQ_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURR_LIQ_MARGIN_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FUTURES_SPREAD_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "FUTURES_SPREAD_MARGIN_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MARGIN_CLASS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARGIN_GROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PREMIUM_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PREMIUM_MARGIN_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNADJ_MARGIN_REQ",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNADJ_MARGIN_REQ_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_INTRA_DAILY_MARGIN_EUR": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Converts all values to hard-coded EUR (MMS requirement)",
+    "comments": "- aka CI750 - converts all to EUR - converts all M%, G% P% Accounts to PP (MMS requirement. I found occurances) - it contains multiple snapshot for a day, so select one using RPT_TIME",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "EXCHANGE_MEMBER",
+        "CLEARING_MEMBER",
+        "CURRENCY",
+        "ACCOUNT",
+        "MARGIN_GROUP",
+        "MARGIN_CLASS"
+      ],
+      "columns_to_ignore": [
+        "SERIAL_NO"
+      ],
+      "where_query": "RPT_DATE in (select distinct rpt_date from dal_risk_o.RISK_V_INTRA_DAILY_MARGIN_EUR where RPT_DATE < trunc (sysdate) order by rpt_date desc fetch  first 2 rows only) and ((RPT_TIME > '080000' and RPT_TIME < '100000') or (RPT_TIME > '130000' and RPT_TIME < '150000') or (RPT_TIME > '170000' and RPT_TIME < '190000'))"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ADDITIONAL_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "CURR_LIQ_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FUTURES_SPREAD_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MARGIN_CLASS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARGIN_GROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PREMIUM_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNADJ_MARGIN_REQ",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_INTRA_DAILY_MARGIN_SUM": {
+    "author": "Steffen Kohla (RiskDev)",
+    "description": "Provide Most recent data for DAL_INTRA_DAILY_MARGIN_SUM aka CI760",
+    "comments": "- run as is - The source is intraday facttable - it contains several snaphsot a day (identified by RPT_TIME) - we only need the latest RPT_TIME - to speed up the query, a with statement is used, collection the last day (fact_date) once",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "POOL_ID",
+        "EXCHANGE_MEMBER",
+        "CURRENCY",
+        "ACCOUNT"
+      ],
+      "columns_to_ignore": [
+        "RPT_TIME",
+        "SERIAL_NO"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHANGE_RATE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MARGIN_REQ",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "POOL_ID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TOTAL_MARGIN_REQ",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNADJ_MARGIN_REQ",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_INTRA_DAILY_SETTLEMENT": {
+    "author": "Steffen Kohla (RiskDev)",
+    "description": "Provide Most recent data for DAL_INTRA_DAILY_SETTLEMENT aka CI042",
+    "comments": "- run as is - The source is intraday facttable - it contains several snaphsot a day (identified by RPT_TIME) - we only need the latest RPT_TIME, but where it matches DAL_INTRA_VAR_PREM - to speed up the query, a with statement is used, collection the last day (fact_date) once",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "POOLID",
+        "SURPLUS_CURRENCY"
+      ],
+      "columns_to_ignore": [
+        "RPT_TIME"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "ADJ_EXCH_RATE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_GUAR_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_SECU_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CASH_ACCOUNTS_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_MEMBER_FROM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CM_CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "OVR_UDR_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OVR_UDR_CURRENCY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "REQUIRED_MARGIN_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SURPLUS_CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_INTRA_DAILY_SETTLEMENT_ALL": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "provides all values and covert to EUR aka. CI042",
+    "comments": "- Must ALWAYS be used together with a date (since it contains the whole history) - pick a shapshot (it containsall shapshotfor the day) - contains all values + euro conversion",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "POOLID",
+        "SURPLUS_CURRENCY",
+        "REQUIRED_MARGIN_AMOUNT"
+      ],
+      "columns_to_ignore": [
+        "SERIAL_NO"
+      ],
+      "where_query": "RPT_DATE in (select distinct rpt_date from dal_risk_o.RISK_V_INTRA_DAILY_SETTLEMENT_ALL where RPT_DATE < trunc (sysdate) order by rpt_date desc fetch  first 2 rows only) and ((RPT_TIME > '080000' and RPT_TIME < '100000') or (RPT_TIME > '130000' and RPT_TIME < '150000') or (RPT_TIME > '170000' and RPT_TIME < '190000'))"
+    },
+    "columns": [
+      {
+        "column_name": "ADJ_EXCH_RATE_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_GUAR_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_GUAR_AMOUNT_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_RATE_CREDIT_CM",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_RATE_CREDIT_SURPLUS",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_SECU_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_SECU_AMOUNT_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CASH_ACCOUNTS_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CASH_ACCOUNTS_AMOUNT_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_MEMBER_FROM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CM_CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CM_CURRENCY_EUR",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "OVR_UDR_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OVR_UDR_AMOUNT_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OVR_UDR_CURRENCY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OVR_UDR_CURRENCY_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "REQUIRED_MARGIN_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "REQUIRED_MARGIN_AMOUNT_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SURPLUS_CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SURPLUS_CURRENCY_EUR",
+        "comments": null,
+        "data_type": "CHAR"
+      }
+    ]
+  },
+  "RISK_V_INTRA_DAILY_SETTLEMENT_EUR": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Converts all values to hard-coded EUR (MMS requirement) aka CI042",
+    "comments": "- converts all to EUR - it contains multiple snapshots for a day, so SELECT one using RPT_TIME",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "POOLID",
+        "SURPLUS_CURRENCY",
+        "REQUIRED_MARGIN_AMOUNT"
+      ],
+      "columns_to_ignore": [
+        "SERIAL_NO"
+      ],
+      "where_query": "RPT_DATE in (select distinct rpt_date from dal_risk_o.RISK_V_INTRA_DAILY_SETTLEMENT_EUR where RPT_DATE < trunc (sysdate) order by rpt_date desc fetch  first 2 rows only) and ((RPT_TIME > '080000' and RPT_TIME < '100000') or (RPT_TIME > '130000' and RPT_TIME < '150000') or (RPT_TIME > '170000' and RPT_TIME < '190000'))"
+    },
+    "columns": [
+      {
+        "column_name": "ADJ_EXCH_RATE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_GUAR_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_SECU_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CASH_ACCOUNTS_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_MEMBER_FROM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CM_CURRENCY",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "OVR_UDR_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OVR_UDR_CURRENCY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "REQUIRED_MARGIN_AMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SURPLUS_CURRENCY",
+        "comments": null,
+        "data_type": "CHAR"
+      }
+    ]
+  },
+  "RISK_V_INTRA_MATCH_SETTL_2_VARPREM": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Get the rpt_time where we have entry in DAL_INTRA_DAILY_SETTLEMENT AND DAL_INTRA_VAR_PREM",
+    "comments": "- ALWAYS provide a FACT_DATE, otherwise it will run for ages.",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME"
+      ],
+      "where_query": "RPT_DATE between trunc(sysdate-7) and trunc(sysdate-1)"
+    },
+    "columns": [
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_INTRA_POSITION_DETAIL": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "POSITIONID",
+        "UTI",
+        "TRNTYP"
+      ],
+      "columns_to_ignore": [
+        "RPT_SEQ_NO"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "ACCTTYPGRP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "BUYCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CUST",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FEEBYUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MEMBCLGIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCODOBO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MKTOMKTTICK",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NETQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OPNCLSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRCMBTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGEXCHID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGORDRNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ORIGTRNID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNTIM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONIDSUFFIX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PARTIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POSITIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRMVMARAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RELATEDTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_SEQ_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TEXT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONIDSUFFIX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDMTCHPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNADJSTSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNFEEAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNHISTADJIND",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDSFXNO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNIDSFXNOPNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNLNGQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNSHTQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "USRORDRNUM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UTI",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_INTRA_POSITION_DETAIL_ALL": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "provides all values and covert to  EUR",
+    "comments": "- Must ALWAYS be used together with a date (since it contains the whole history) - pick a shapshot (it containsall shapshotfor the day) - contains all values + euro conversion",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "POSITIONID",
+        "UTI",
+        "TRNTYP"
+      ],
+      "columns_to_ignore": [
+        "RPT_SEQ_NO"
+      ],
+      "where_query": "RPT_DATE in (select distinct rpt_date from dal_risk_o.RISK_V_INTRA_POSITION_DETAIL_ALL where RPT_DATE < trunc (sysdate) and RPT_DATE > trunc (sysdate-14) order by rpt_date desc fetch  first 1 rows only) and ((RPT_TIME > '094000' and RPT_TIME < '100000') or (RPT_TIME > '184000' and RPT_TIME < '190000'))"
+    },
+    "columns": [
+      {
+        "column_name": "ACCTTYPGRP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ACCTTYPGRP_SIMPLE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ADJ_RATE_CREDIT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "BUYCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRTYPCOD_EUR",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "CUST",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FEEBYUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MEMBCLGIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCODOBO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MKTOMKTTICK",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NETQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OPNCLSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRCMBTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGEXCHID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGORDRNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ORIGTRNID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNTIM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONIDSUFFIX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PARTIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POSITIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRMVMARAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RELATEDTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_SEQ_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TEXT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONIDSUFFIX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDMTCHPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDMTCHPRC_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNADJSTSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNFEEAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNHISTADJIND",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDSFXNO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNIDSFXNOPNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNLNGQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNSHTQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "USRORDRNUM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UTI",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_INTRA_POSITION_DETAIL_EUR": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Converts all values to hard-coded EUR (MMS requirement)",
+    "comments": "- CI420 (CI012) - converts all values to EUR - it contains multiple snapshot for a day, so select one using RPT_TIME - converts all M%, G% P% Accounts to PP (MMS requirement. I found occurances)",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "POSITIONID",
+        "UTI",
+        "TRNTYP"
+      ],
+      "columns_to_ignore": [
+        "RPT_SEQ_NO"
+      ],
+      "where_query": "RPT_DATE in (select distinct rpt_date from dal_risk_o.RISK_V_INTRA_POSITION_DETAIL_EUR where RPT_DATE < trunc (sysdate) and RPT_DATE > trunc (sysdate-14) order by rpt_date desc fetch  first 1 rows only) and ((RPT_TIME > '094000' and RPT_TIME < '100000') or (RPT_TIME > '184000' and RPT_TIME < '190000'))"
+    },
+    "columns": [
+      {
+        "column_name": "ACCTTYPGRP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "BUYCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "CUST",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FEEBYUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MEMBCLGIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCODOBO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MKTOMKTTICK",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NETQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OPNCLSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRCMBTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGEXCHID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGORDRNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ORIGTRNID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNTIM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONIDSUFFIX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PARTIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POSITIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRMVMARAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RELATEDTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_SEQ_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TEXT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONIDSUFFIX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDMTCHPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNADJSTSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNFEEAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNHISTADJIND",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDSFXNO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNIDSFXNOPNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNLNGQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNSHTQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "USRORDRNUM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UTI",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_INTRA_POSITION_DETAIL_EUR_NOEOD": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Sums up all current positions per member, account AND product",
+    "comments": "Usage: - CI420 (CI012) - Since it is a MR view, shows you the most recent only - but filter all EoD Transactions 'END' , '104' , '116' , '126' - This view is a 1:1 replacement of the LZDB version - This view does not show valid values for option, since it does NOT consider the exercise price to the call/put flag. Since this behavior was also present in the original view, I did not fix it.",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "POSITIONID",
+        "UTI",
+        "TRNTYP"
+      ],
+      "columns_to_ignore": [
+        "RPT_SEQ_NO"
+      ],
+      "where_query": "RPT_DATE in (select distinct rpt_date from dal_risk_o.RISK_V_INTRA_POSITION_DETAIL_EUR_NOEOD where RPT_DATE < trunc (sysdate) and RPT_DATE > trunc (sysdate-14) order by rpt_date desc fetch  first 1 rows only) and ((RPT_TIME > '094000' and RPT_TIME < '100000') or (RPT_TIME > '184000' and RPT_TIME < '190000'))"
+    },
+    "columns": [
+      {
+        "column_name": "ACCTTYPGRP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "BUYCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "CUST",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FEEBYUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MEMBCLGIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCODOBO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MKTOMKTTICK",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NETQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OPNCLSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRCMBTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGEXCHID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGORDRNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ORIGTRNID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNTIM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONIDSUFFIX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PARTIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POSITIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRMVMARAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RELATEDTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_SEQ_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TEXT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONIDSUFFIX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDMTCHPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNADJSTSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNFEEAMNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNHISTADJIND",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDSFXNO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNIDSFXNOPNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNLNGQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNSHTQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "USRORDRNUM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UTI",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_INTRA_POS_DETAIL_SUM_MR": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Sums up all current positions per member, account AND product",
+    "comments": "- CI420 (CI012) - Since it is an MR view, shows you the most recent only - This view is a 1:1 replacement of the LZDB version - This view does not show valid values for option, since it does NOT consider the exercise price to the call/put flag. Since this behavior was also present in the original view, I did not fix it.",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "MEMBCLGIDCOD",
+        "MEMBEXCHIDCOD",
+        "CURRTYPCOD",
+        "ACCTTYPGRP",
+        "PRODID",
+        "CNTREXPYRDAT",
+        "CNTREXPMTHDAT"
+      ],
+      "columns_to_ignore": [
+        "RPT_TIME"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "ACCTTYPGRP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBCLGIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POSNNETBAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SUMTRNLNGQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SUMTRNSHTQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_INTRA_VAR_PREM_E11": {
+    "author": "Steffen Kohla (RiskDev)",
+    "description": "Provide Most recent data for DAL_INTRA_VAR_PREM aka CI140",
+    "comments": "run as is - The source is intraday facttable - it contains several snaphsot a day (identified by RPT_TIME) - we only need the latest RPT_TIME, but where it matches DAL_INTRA_DAILY_SETTLEMENT - to speed up the query, a with statement is used, collection the last day (fact_date) once",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "POOLID",
+        "EXCHANGE_MEMBER",
+        "CURRENCY",
+        "MARGIN_GROUP",
+        "MARGIN_CLASS",
+        "PRODUCT",
+        "ACCOUNT"
+      ],
+      "columns_to_ignore": [
+        "SERIAL_NO"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCH_RATE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MARGIN_CLASS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARGIN_GROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PREMIUM_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRM_VMAR_AMNT_CLG_CURR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_INTRA_VAR_PREM_E11_ALL": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "provides all values and coverion to EUR aka CI140",
+    "comments": "Must ALWAYS be used together with a date (since it contains the whole history) - pick a shapshot (it containsall shapshotfor the day) - contains all values + euro conversion",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "POOLID",
+        "EXCHANGE_MEMBER",
+        "CURRENCY",
+        "MARGIN_GROUP",
+        "MARGIN_CLASS",
+        "PRODUCT",
+        "ACCOUNT"
+      ],
+      "columns_to_ignore": [
+        "SERIAL_NO"
+      ],
+      "where_query": "RPT_DATE in (select distinct rpt_date from dal_risk_o.RISK_V_INTRA_VAR_PREM_E11_ALL where RPT_DATE < trunc (sysdate) and RPT_DATE > trunc (sysdate-14) order by rpt_date desc fetch  first 2 rows only) and ((RPT_TIME > '080000' and RPT_TIME < '100000') or (RPT_TIME > '130000' and RPT_TIME < '150000') or (RPT_TIME > '170000' and RPT_TIME < '190000'))"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ACCOUNT_SIMPLE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ADJ_RATE_CREDIT_CLEAR_CUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ADJ_RATE_CREDIT_CUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARING_CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_CURRENCY_EUR",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY_EUR",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCH_RATE_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MARGIN_CLASS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARGIN_GROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PREMIUM_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PREMIUM_MARGIN_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRM_VMAR_AMNT_CLG_CURR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRM_VMAR_AMNT_CLG_CURR_EUR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_INTRA_VAR_PREM_E11_EUR": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Converts all values to hard-coded EUR (MMS requirement) aka CI140",
+    "comments": "- converts all values to EUR - it contains multiple snapshots for a day, so select one using RPT_TIME - and converts all M%, G% P% Accounts to PP (MMS requirement. I could not find any occurance).",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "RPT_TIME",
+        "POOLID",
+        "EXCHANGE_MEMBER",
+        "CURRENCY",
+        "MARGIN_GROUP",
+        "MARGIN_CLASS",
+        "PRODUCT",
+        "ACCOUNT"
+      ],
+      "columns_to_ignore": [
+        "SERIAL_NO"
+      ],
+      "where_query": "RPT_DATE in (select distinct rpt_date from dal_risk_o.RISK_V_INTRA_VAR_PREM_E11_EUR where RPT_DATE < trunc (sysdate) and RPT_DATE > trunc (sysdate-14) order by rpt_date desc fetch  first 2 rows only) and ((RPT_TIME > '080000' and RPT_TIME < '100000') or (RPT_TIME > '130000' and RPT_TIME < '150000') or (RPT_TIME > '170000' and RPT_TIME < '190000'))"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_CURRENCY",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCH_RATE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MARGIN_CLASS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MARGIN_GROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POOLID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PREMIUM_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRM_VMAR_AMNT_CLG_CURR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "RPT_TIME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SERIAL_NO",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_LATEST_FCT_LOAD_STATUS": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Shows latest techncial update and lastest busiess fact for used Risk tables",
+    "comments": "- run as is, it's most recent - 01.01.1970 is default - add lastets entries from load_status - add lastets date for load_status - BDWH-12280",
+    "regression_test_config": {
+      "comparison_key": [
+        "FACT_DATE",
+        "TARGET_TABLE_NAME"
+      ],
+      "columns_to_ignore": [
+        "ITS",
+        "LOAD_STATUS_TIMESTAMP"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "FACT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ITS",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "LOAD_STATUS_TIMESTAMP",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "TARGET_TABLE_NAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_POSITION": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "EXCHANGE_MEMBER",
+        "PRODUCT",
+        "CNTREXPYRDAT",
+        "CNTREXPMTHDAT",
+        "CNTRCLASCOD",
+        "CNTREXERPRC",
+        "ACCOUNT",
+        "CLEARING_MEMBER"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_position where rpt_date > trunc(sysdate -14) order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "ACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARING_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHANGE_MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "LONG_POS",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "SHORT_POS",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRNFEEAMNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VAR_MARGIN",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SERIES_CONTRACTS": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "PRODID",
+        "CNTREXPYRDAT",
+        "CNTREXPMTHDAT",
+        "CNTRCLASCOD",
+        "CNTREXERPRC"
+      ],
+      "where_query": "rpt_date in  (select distinct rpt_date from dal_risk_o.risk_v_series_contracts order by rpt_date desc fetch  first 3 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTRSTSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTRVERSNO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXPDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "LEPOFLG",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "STRKPRCM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRDDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TRDUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDUNTCSH",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRDUNTSHARES",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UNIQUECNTRID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VALORNUM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_SERIES_PRODUCTS": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "PRODID"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_series_products where rpt_date > trunc(sysdate -14) order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "BLKTRDFLG",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DISPDCML",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EQBIDASKQTYREQRFLG",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXERPRCDCML",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXERSTYLTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FASTMARKETQUOTEPCNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FASTMKTQUOTEMINQTY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FINSETLMTTIM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FLXCNTRTRDALLWDFLG",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ISINCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MATCHTYPECODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MAXPRICE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MGNCLSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MGNSTYLE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MINBLKSIZ",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ONESIDEQUOTEALWDFLG",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "OPTIGATEWAYLOCID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODEXCHAFF",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODLNGNAM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODTYPID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "QUOTEMINQTY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "SETLTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "STLCURRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "STRATMATCHCODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TICSIZ",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TICVAL",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TRDSYSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UNDRIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UNDRISIN",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UNIQUEPRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "USTRDRFLG",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VOLASTRATUNDRID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_SETTLEMENT_INSTRUCTION": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RECORDID"
+      ],
+      "columns_to_ignore": [
+        "ID",
+        "INSERTTIMESTAMP"
+      ],
+      "where_query": "fact_date = (select max(fact_date) from dal_risk_o.risk_v_settlement_instruction where fact_date < to_date(sysdate)) order by timestamp, recordid fetch  first 200000 rows only"
+    },
+    "columns": [
+      {
+        "column_name": "BUYSELL",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARINGFEEAMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARINGFEEDOMESTICVAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARINGFEEFOREIGNVAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CLEARINGMEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DELIVERYACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DELIVERYEND",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DELIVERYEND_CET",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DELIVERYPOINT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DELIVERYSTART",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DELIVERYSTART_CET",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DELIVERYSTATUS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXCHANGEFEEAMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXCHANGEFEEDOMESTICVAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXCHANGEFEEFOREIGNVAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXTERNALID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXTERNALMEMBERID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXTERNALPRODUCTID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXTERNALSUBID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "FACT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "INSERTTIMESTAMP",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "INVOICERELEVANTDATECLEARINGFEE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "INVOICERELEVANTDATEEXCHANGEFEE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "INVOICESTATUSCLEARINGFEE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "INVOICESTATUSEXCHANGEFEE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "NUMBEROFCONTRACTS",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OPTIMISTICLOCK",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PAYMENTAMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PAYMENTDAY",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "PAYMENTFOREIGNVAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PAYMENTGERMANVAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PAYMENTGROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PAYMENTSTATUS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRICE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCTGROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RECORDID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SETTLEMENTMEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SETTLEMENTTYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SOURCE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TIMESTAMP",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TIMESTAMP_CET",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TOTALQUANTITY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRADERID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRADETYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRADINGACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONTYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UOM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SETTLEMENT_PRICE": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "provides settlement prices from MDH for all products",
+    "comments": "- MUST always be used with a date - Contains the unapproved and approved prices (so filter by PRICE_APPROVED = 1 for approved) - But only one unapproved and approved prices (the lastest of it), there are days, when we get more than one",
+    "regression_test_config": {
+      "comparison_key": [
+        "FACT_DATE",
+        "FACT_TIMESTAMP",
+        "INSTRUMENT_CODE_EEX",
+        "SOURCE_CODE"
+      ],
+      "columns_to_ignore": [
+        "ITS",
+        "FACT_ID",
+        "INSTRUMENT_ID",
+        "PRODUCT_ID"
+      ],
+      "where_query": "fact_date in (select fact_date FROM dal_risk_o.risk_v_settlement_price  where fact_date > sysdate -7  group by fact_date order by fact_date desc  fetch  first 2 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "CALL_PUT_FLAG",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXERCISE_PRICE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXP_MONTH",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "EXP_YEAR",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "FACT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "FACT_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "FACT_TIMESTAMP",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "INSTRUMENT_CODE_EEX",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "INSTRUMENT_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ITS",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "PRICE_APPROVED",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCT_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT_ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCT_LONGNAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SETTLEMENT_PRICE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SOURCE_CODE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_SETTLEMENT_PRICE_STATUS": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "PRODID",
+        "CNTREXPYRDAT",
+        "CNTREXPMTHDAT",
+        "CNTREXERPRC",
+        "CNTRCLASCOD"
+      ],
+      "columns_to_ignore": [
+        "UPDATE_TIME",
+        "ITS"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_settlement_price_status order by rpt_date desc fetch  first 3 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTRVERSNO",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ITS",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "SETTLEMENT_PRICE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "STATUS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UPDATE_TIME",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      }
+    ]
+  },
+  "RISK_V_SMSS_ADDRESS": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "COMPANYID",
+        "VERSION",
+        "CATEGORY",
+        "ID"
+      ],
+      "columns_to_ignore": [
+        "VALIDFROM",
+        "VALIDTO"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "CATEGORY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "COMPANYID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "COUNTRY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VALIDFROM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VALIDTO",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SMSS_CLEARINGMEMBER": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "ID",
+        "VERSION"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "CCPID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "STATE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SMSS_CM_NCM": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "SETTLEMENTMEMBER",
+        "PRODUCTGROUP",
+        "SMPGVALIDFROM"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "CLEARINGMEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "COMPANY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCTGROUP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SETTLEMENTMEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SMPGVALIDFROM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "SMPGVALIDFROM_CET",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "SMPGVALIDTO",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "SMPGVALIDTO_CET",
+        "comments": null,
+        "data_type": "DATE"
+      }
+    ]
+  },
+  "RISK_V_SMSS_COMPANY": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "ID",
+        "VERSION"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VALIDFROM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VALIDTO",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SMSS_DELIVERYACCOUNT": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "ID",
+        "VERSION"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DELIVERYPOINT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UNDERLYING",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VALIDFROM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VALIDTO",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SMSS_DMS_TRANSACTION": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "MAINID"
+      ],
+      "where_query": "initiatedat < trunc(sysdate) order by initiatedat desc fetch  first 10000 rows only",
+      "columns_to_ignore": [
+        "ITS"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "ACTION",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "BOOKKEEPINGDATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DEBITCREDIT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DELIVERYACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DMSTRANSACTIONSTATUS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "FACT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "INITIATEDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "INITIATEDBY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ITS",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "MAINID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MEMO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "NUMBEROFCERTS",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "REVIEWCOMMENT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "REVIEWEDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "REVIEWEDBY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONTYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UNDERLYING",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SMSS_PRODUCTGROUP": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "ID",
+        "VERSION"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "SOURCE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONTYPE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VALIDFROM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VALIDTO",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SMSS_SETTLEMENTMEMBER": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "ID",
+        "VERSION"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "COMPANYID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "NAME",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "STATE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SMSS_SETTLEMENTMEMBER_PG": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "ID",
+        "VERSION"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "CLEARINGMEMBERID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "DELIVERYACCOUNTID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCTGROUPID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SETTLEMENTMEMBERID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "VALIDFROM",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VALIDTO",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SMSS_SI_ALLV_CERT": {
+    "author": "BDWH Team and Christoph Hackel",
+    "description": "This view was created to support analysis for the certificate margin.",
+    "comments": "This is NOT an IT managed view and thus must not be used for productive purposes.",
+    "regression_test_config": {
+      "comparison_key": [
+        "TIMESTAMP_CET",
+        "ID"
+      ],
+      "columns_to_ignore": [
+        "INSERTTIMESTAMP_CET"
+      ],
+      "where_query": "timestamp_cet > to_date(sysdate) - 10 order by timestamp_cet desc, id"
+    },
+    "columns": [
+      {
+        "column_name": "BUYSELL",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CLEARINGMEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "COMMODITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CURRENCY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DELIVERYACCOUNT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "DELIVERYSTART_CET",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "DELIVERYSTATUS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "EXTERNALPRODUCTID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ID",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "INSERTTIMESTAMP_CET",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "PAYMENTAMOUNT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PAYMENTDAY",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "PAYMENTFOREIGNVAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PAYMENTGERMANVAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PAYMENTSTATUS",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRICE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "SETTLEMENTMEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TIMESTAMP_CET",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TOTALQUANTITY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UOM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "VERSION",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_SPAN_TRIGGER": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE"
+      ],
+      "columns_to_ignore": [
+        "LAST_UPDATE_TIME",
+        "LAST_ITS"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "COUNT_APPROVED",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "COUNT_MISSING",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "COUNT_UNAPPROVED",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "LAST_ITS",
+        "comments": "LAST_ITS is a CET timestamp representing the time point of BDWH DAL processing",
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "LAST_UPDATE_TIME",
+        "comments": "LAST_UPDATE_TIME is a UTC timestamp representing SETTLEMENT_TIMESTAMP of the source system MDH",
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "PRICES_COMPLETE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      }
+    ]
+  },
+  "RISK_V_TRADE_CONFIRMATION": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Get account details for balances",
+    "comments": "- This view provides you with the Trades, as delivered from C7 (based on positions) - No intraday update - It can be used SoD the next day (The Position gets delivered EoD, but the link account statement SoD) - Fact_date required as input",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "TRANSACTIONID",
+        "TRANSACTIONIDSUFFIX"
+      ],
+      "where_query": "rpt_date in (select distinct rpt_date from dal_risk_o.risk_v_trade_confirmation where rpt_date > trunc(sysdate -14) order by rpt_date desc fetch  first 5 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "ACCTTYPGRP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "BUYCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CUST",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBCLGIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBEXCHIDCODOBO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "OPNCLSCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRCMBTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRPRTFILCOD",
+        "comments": null,
+        "data_type": "CHAR"
+      },
+      {
+        "column_name": "ORDRRESCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORDRTYPCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGEXCHID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGORDRNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNDAT",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "ORIGTRNID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "ORIGTRNTIM",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "ORIGTRNTIM2",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PARENTTRANSACTIONIDSUFFIX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PARTIDCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "POSITIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RELATEDTRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TEXT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TIME",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "TIME2",
+        "comments": null,
+        "data_type": "TIMESTAMP(9)"
+      },
+      {
+        "column_name": "TRANSACTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRANSACTIONIDSUFFIX",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDMTCHPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDMTCHQTY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "TRDTYP",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "TRNIDNO",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "USRORDRNUM",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "UTI",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  },
+  "RISK_V_TRADE_STATISTICS": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Provides TD930",
+    "comments": "- run with Fact_date - takes daily instuments source 'C7' - add DAL_TRADE_STATISTICS (open low prices) - add previosSettlement price - add OI - add current settlement price - add underlyings",
+    "regression_test_config": {
+      "comparison_key": [
+        "RPT_DATE",
+        "PRODUCT",
+        "CNTREXPYRDAT",
+        "CNTREXPMTHDAT",
+        "CNTRCLASCOD",
+        "CNTREXERPRC"
+      ],
+      "where_query": "rpt_date = trunc(sysdate-1)"
+    },
+    "columns": [
+      {
+        "column_name": "CLOSE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTRCLASCOD",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXERPRC",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "CNTREXPMTHDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CNTREXPYRDAT",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "CURR_SP",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "DAILY_VOL",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "HIGH",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "LOW",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MTD_VOL",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "OI",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "OPEN",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PREV_SP",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "PRODUCT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT_LINE",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "RPT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "UNDRLSTCLSPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "UNDRPRVCLSPRC",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_VIRTUAL_OPTION_STRIKE": {
+    "author": null,
+    "description": null,
+    "comments": null,
+    "regression_test_config": {
+      "comparison_key": [
+        "IMPORT_DATE",
+        "MEMBER",
+        "CONTRACT"
+      ],
+      "where_query": "import_date in (select distinct import_date from dal_risk_o.risk_v_virtual_option_strike  where import_date > trunc(sysdate-14) order by import_date desc fetch  first 7 rows only)"
+    },
+    "columns": [
+      {
+        "column_name": "CONTRACT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "IMPLIED_VOLATILITY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "IMPORTTIME",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "IMPORT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "MATURITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "MEMBER",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "STRIKE",
+        "comments": null,
+        "data_type": "NUMBER"
+      }
+    ]
+  },
+  "RISK_V_VIRTUAL_OPTION_STRIKE_MR": {
+    "author": "Steffen Kohla (Risk DEV)",
+    "description": "Provide Most recent data of virtual option strikes",
+    "comments": "- run as is - contains most recent data per contract - Query rawdata, but member final and call option only - shows lastest data per contract",
+    "regression_test_config": {
+      "comparison_key": [
+        "FACT_DATE",
+        "OptionID"
+      ]
+    },
+    "columns": [
+      {
+        "column_name": "FACT_DATE",
+        "comments": null,
+        "data_type": "DATE"
+      },
+      {
+        "column_name": "IMPLIED_VOLATILITY",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "MATURITY",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "OPTIONID",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODID_SERIES",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "PRODUCT",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      },
+      {
+        "column_name": "STRIKE",
+        "comments": null,
+        "data_type": "NUMBER"
+      },
+      {
+        "column_name": "STRIKESTRING",
+        "comments": null,
+        "data_type": "VARCHAR2"
+      }
+    ]
+  }
+}
