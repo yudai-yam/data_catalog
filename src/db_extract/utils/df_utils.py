@@ -2,7 +2,7 @@ import json
 
 import pandas as pd
 
-from bdwh_extract.config import allowed_table_prefixes
+from db_extract.config import allowed_table_prefixes
 
 
 def separate(df: pd.DataFrame) -> dict:

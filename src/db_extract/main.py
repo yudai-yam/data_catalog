@@ -3,8 +3,8 @@ import logging
 import pandas as pd
 from dotenv import load_dotenv
 
-from bdwh_extract.config import allowed_table_prefixes, inputs_folder, read_config
-from bdwh_extract.utils import db_utils, df_utils, json_utils
+from db_extract.config import allowed_table_prefixes, inputs_folder, read_config
+from db_extract.utils import db_utils, df_utils, json_utils
 
 
 def load_configuration():

@@ -23,7 +23,7 @@ dependencies = [
 ]
 
 [project.scripts]
-extract_bdwh = "bdwh_extract.main:extract"
+extract_db = "db_extract.main:extract"
 build = "data_catalog.catalog_builder.main:build"
 dev = "data_catalog.main:dev"
 

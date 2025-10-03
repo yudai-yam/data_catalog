@@ -2,8 +2,8 @@ import logging
 
 import pandas as pd
 
-from bdwh_extract.config import allowed_table_prefixes, target_columns
-from bdwh_extract.utils import df_utils
+from db_extract.config import allowed_table_prefixes, target_columns
+from db_extract.utils import df_utils
 
 
 def extract_and_query_table(
@@ -37,6 +37,7 @@ def extract_and_query_table(
         return df_utils.clean(df)
     except Exception as e:
         logging.error(e)
+        raise e
 
 
 def sanitize_table_name(table_name: str) -> str:
