@@ -125,9 +125,8 @@ def write_index(output_folder: Path):
 
     index_description = """
         This page hosts a data catalog of databases.
-        This page can be updated through a successful PR to the master branch of data_catalog repository: https://github.deutsche-boerse.de/EXG-dev-confidential/exg.app.ers.data_catalog.
+        This page can be updated through a successful PR to the master branch of data_catalog repository: https://github.com/yudai-yam/data_catalog.
         Refer the ``README.rst`` in the repository for more information.
-        Note that this repository is currently under development.
     """
 
     context = {
