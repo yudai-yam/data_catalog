@@ -1,8 +1,8 @@
 {
   "ERS_V_ADJUSTED_EXCHANGE_RATES": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "To get the end of day exchange rates",
-    "comments": "- You will get the latest conversion factors available on fact date - currencies are provided by PRISMA - conversions factors are to be multiplied in order to convert from source to target currency",
+    "comments": "This is a dummy comment",
     "regression_test_config": {
       "comparison_key": [
         "FACT_DATE",
@@ -18,26 +18,6 @@
         "data_type": "NUMBER"
       },
       {
-        "column_name": "CONVERSION_FACTOR_CREDIT",
-        "comments": "Credit adjusted conversion factor",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CONVERSION_FACTOR_DEBIT",
-        "comments": "Debit adjusted conversion factor",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "FACT_DATE",
-        "comments": "Date for which you want to convert an amount",
-        "data_type": "DATE"
-      },
-      {
-        "column_name": "HAIRCUT",
-        "comments": "Haircuts applied to credit / debit adjusted exchange rates",
-        "data_type": "NUMBER"
-      },
-      {
         "column_name": "SOURCE_CURRENCY",
         "comments": "Source currency code",
         "data_type": "VARCHAR2"
@@ -50,9 +30,9 @@
     ]
   },
   "ERS_V_ADJUSTED_EXCHANGE_RATES_EURO": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Get the end of day exchange rates for conversion to Euro",
-    "comments": "- You will get the latest conversion factors available on fact date - currencies are provided by PRISMA - conversions factors are to be multiplied in order to convert from source to target currency",
+    "comments": "This is another dummy comment",
     "regression_test_config": {
       "comparison_key": [
         "FACT_DATE",
@@ -73,19 +53,9 @@
         "data_type": "NUMBER"
       },
       {
-        "column_name": "CONVERSION_FACTOR_DEBIT",
-        "comments": "Debit adjusted conversion factor",
-        "data_type": "NUMBER"
-      },
-      {
         "column_name": "FACT_DATE",
         "comments": "Date for which you want to convert an amount",
         "data_type": "DATE"
-      },
-      {
-        "column_name": "HAIRCUT",
-        "comments": "Haircuts applied to credit / debit adjusted exchange rates",
-        "data_type": "NUMBER"
       },
       {
         "column_name": "SOURCE_CURRENCY",
@@ -100,9 +70,9 @@
     ]
   },
   "ERS_V_BUSINESS_CALENDAR": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
-    "description": "Provide the business day calendar for ECC",
-    "comments": "",
+    "author": "Author B",
+    "description": "Provide the business day calendar",
+    "comments": "Have a good one!",
     "regression_test_config": {
       "comparison_key": [
         "FACT_DATE"
@@ -116,31 +86,6 @@
         "data_type": "NUMBER"
       },
       {
-        "column_name": "DAY_COMMENT",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "DAY_IN_YEAR",
-        "comments": "Consecutive numbering of days in a year",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "ECC_BUSINESS_DAY",
-        "comments": "1 indicates that the current date is an ECC business day, else 0",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "FACT_DATE",
-        "comments": "Day for which information is provided",
-        "data_type": "DATE"
-      },
-      {
-        "column_name": "WEEKDAY",
-        "comments": "Name of the weekday",
-        "data_type": "VARCHAR2"
-      },
-      {
         "column_name": "WEEKDAY_INDEX",
         "comments": "Numerical representation of the weekday, starting with 1 at Monday till 7 on Sunday",
         "data_type": "NUMBER"
@@ -148,8 +93,8 @@
     ]
   },
   "ERS_V_CM_NCM_CLEARER_CHANGE": {
-    "author": "Steffen Kohla (Risk DEV)",
-    "description": "Provide CM-NCM-relation over time with clearer change info using SMSS hist table",
+    "author": "Author B",
+    "description": "Provide CM-NCM-relation over time with clearer change info using another specific table",
     "comments": "- Use as is - min_valid_from / max_valid_to is taken over the valid_from and valid_to values of all valid product groups in a timeframe - overlapping timeframes possible in case of SMSS setup error - valid_from and valid_to are normally EOD (in UTC) but somtimes intraday changes are executed, these are only reflected the next day",
     "regression_test_config": {
       "comparison_key": [
@@ -159,31 +104,6 @@
       ]
     },
     "columns": [
-      {
-        "column_name": "CLEARING_MEMBER",
-        "comments": "Member code of the clearing member.",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CLEARING_MEMBER_OLD",
-        "comments": "Member code of the previous clearing member (null if not exist).",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member.",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "HAS_DERIV_PRODUCTS",
-        "comments": "Exchange member is eligible to trade derivatives products.",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "HAS_SPOT_PRODUCTS",
-        "comments": "Exchange member is eligible to trade spot products.",
-        "data_type": "NUMBER"
-      },
       {
         "column_name": "MAX_VALID_TO",
         "comments": "Latest valid_to over all product groups. (intraday changes possible, but than valied for next day) Null means no end date",
@@ -197,8 +117,8 @@
     ]
   },
   "ERS_V_CM_NCM_RELATIONS": {
-    "author": "Steffen Kohla (Risk DEV)",
-    "description": "Provide CM-NCM-Relations valid for a given fact_date based on SMSS hist table",
+    "author": "Author C",
+    "description": "Provide CM-NCM-Relations valid for a given fact_date based on another specific table",
     "comments": "- MUST always be used by filtering for FACT_DATE (multiple days are possible), do NOT use the valid_from and valid_to fields - min_valid_from / max_valid_to is taken over the valid_from and valid_to values of all valid product groups that day - valid_from and valid_to are normally EOD (in UTC) but somtimes intraday changes are executed, these are only reflected the next day",
     "regression_test_config": {
       "comparison_key": [
@@ -208,26 +128,6 @@
       "where_query": "fact_date = trunc(sysdate)"
     },
     "columns": [
-      {
-        "column_name": "CLEARING_MEMBER",
-        "comments": "Member code of the clearing member.",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member.",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "FACT_DATE",
-        "comments": "Date for which the relation is valid. It is possible to select multiple days.",
-        "data_type": "DATE"
-      },
-      {
-        "column_name": "HAS_DERIV_PRODUCTS",
-        "comments": "Exchange member is eligible to trade derivatives products.",
-        "data_type": "NUMBER"
-      },
       {
         "column_name": "HAS_SPOT_PRODUCTS",
         "comments": "Exchange member is eligible to trade spot products.",
@@ -246,7 +146,7 @@
     ]
   },
   "ERS_V_DMS_DAILY_BALANCES": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Get account details for balances",
     "comments": "- This view gave errors with DAL_REF_DAILY_BALANCES_OFFSET in the schema DAL_IDP_O - This view removes dependency on the DAL_IDP_O.DAL_REF_DAILY_BALANCES_OFFSET",
     "regression_test_config": {
@@ -274,31 +174,6 @@
         "data_type": "NUMBER"
       },
       {
-        "column_name": "DAILY_TOTAL_TRANSFER",
-        "comments": "Amount transfered on FACT_DATE",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "DELIVERY_ACCOUNT",
-        "comments": "Identifier of the account which held the balances",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "FACT_DATE",
-        "comments": "Date for which balance was valid",
-        "data_type": "DATE"
-      },
-      {
-        "column_name": "FUTURE_BALANCE",
-        "comments": "Value of PROJECTED_BALANCE for 6 days in the future",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "NO_SOURCE_DATA",
-        "comments": "A 0 indicates that the entry can be found in the source data. A 1 indicates that the last previously available previous date point was used",
-        "data_type": "NUMBER"
-      },
-      {
         "column_name": "PROJECTED_BALANCE",
         "comments": "Balance taking upcoming transactions into account",
         "data_type": "NUMBER"
@@ -306,7 +181,7 @@
     ]
   },
   "ERS_V_EOD_COLLATERALS": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
+    "author": "Author B",
     "description": "Provide end of day collaterals for a specific day",
     "comments": "- Currency conversion uses the latest unadjusted exchange rate prior to fact_date - This table contains securities and cash collaterals",
     "regression_test_config": {
@@ -319,46 +194,6 @@
       "where_query": "fact_date in (select distinct fact_date from dal_risk_o.ers_v_eod_collaterals order by fact_date desc fetch first 5 rows only)"
     },
     "columns": [
-      {
-        "column_name": "CENTRAL_SECURITIES_DEPOSIT_ACCOUNT",
-        "comments": "Account number where the security is deposited",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CENTRAL_SECURITIES_DEPOSIT_ID",
-        "comments": "Identification of the custodian where the security is deposited",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CLEARING_MEMBER",
-        "comments": "Member code of the clearing member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "COLLATERAL_AMOUNT",
-        "comments": "Nominal amount of the collateral.",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "COLLATERAL_CODE",
-        "comments": "In case of a security, this field contains the ISIN in case of cash it says \"CASH\"",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "COLLATERAL_PRICE_FACTOR",
-        "comments": "Nominal amount times this factor gives market value",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "COLLATERAL_TYPE",
-        "comments": "This columns allows quick identification of securities - \"SECURITIES\" - and cash - \"CASH\"",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "COLLATERAL_USAGE",
-        "comments": "For what the collateral is used. M - Margin, F - Clearingfund",
-        "data_type": "VARCHAR2"
-      },
       {
         "column_name": "COLLATERAL_VALUE",
         "comments": "Value of the collateral in original currency after applying the haircut",
@@ -390,21 +225,6 @@
         "data_type": "DATE"
       },
       {
-        "column_name": "HAIRCUT",
-        "comments": "Reduction applied to the value of the collateral. This functions as a safety buffer against the collateral losing value.",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "MARKET_VALUE",
-        "comments": "Market value of the collateral in original currency. No haircut applied!",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "MARKET_VALUE_EURO",
-        "comments": "Market value of the collateral in Euro. No haircut applied!",
-        "data_type": "NUMBER"
-      },
-      {
         "column_name": "POOL_ID",
         "comments": "Identifier of the pool in which the security is held",
         "data_type": "VARCHAR2"
@@ -412,7 +232,7 @@
     ]
   },
   "ERS_V_EOD_DMS_COLLATERAL": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author C",
     "description": "Get EUA and Guarantee collateral from DMS",
     "comments": [
       "basic approach is done like for the dms_daily_balances view but we filter for eua and guarantee collateral entries",
@@ -434,36 +254,6 @@
         "column_name": "COLLATERAL_TYPE",
         "comments": "Identifier that is either \"EUA\" or \"GUARANTEE\"",
         "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "COMMODITY",
-        "comments": "Identifier of the commodity which was held",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CONVERSION_FACTOR",
-        "comments": "Unadjusted conversion factor used to convert from original currency to Euro",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRENCY_CODE",
-        "comments": "Currency in which collateral is originally denoted.",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CURRENT_BALANCE",
-        "comments": "Current balance of the associated commodity",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRENT_MARKET_VALUE",
-        "comments": "Current balance times price in original currency.",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRENT_MARKET_VALUE_EURO",
-        "comments": "Current balance times price in Euro",
-        "data_type": "NUMBER"
       },
       {
         "column_name": "DELIVERY_ACCOUNT",
@@ -493,7 +283,7 @@
     ]
   },
   "ERS_V_EOD_MARGIN_DETAIL": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
+    "author": "Author B",
     "description": "Provide end of day margins on CM-NCM-Account-Margin Class level",
     "comments": "- Currency conversion is done with the latest unadjusted exchange rate found prior to fact_date - only rows with a valid exchange rate are shown - it was tried to join pool_id to this table but in certain situations the relation is not available in the margin summary table, seems to be related to the final_margin being zero.",
     "regression_test_config": {
@@ -514,21 +304,6 @@
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "CLEARING_MEMBER",
-        "comments": "Member code of the clearing member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CONVERSION_FACTOR",
-        "comments": "Conversion factor used to convert from original currency to Euro",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRENCY_CODE",
-        "comments": "Original currency of the margin",
-        "data_type": "VARCHAR2"
-      },
-      {
         "column_name": "EXCHANGE_MEMBER",
         "comments": "Member code of the exchange member",
         "data_type": "VARCHAR2"
@@ -539,34 +314,9 @@
         "data_type": "DATE"
       },
       {
-        "column_name": "FINAL_MARGIN",
-        "comments": "Margin requirement after considering margin premium in original currency, i.e. final = initial + premium",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "FINAL_MARGIN_EURO",
-        "comments": "Margin requirement after considering margin premium converted to Euro, i.e. final = initial + premium",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "INITIAL_MARGIN",
-        "comments": "Margin requirement without considering margin premium in original currency",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "INITIAL_MARGIN_EURO",
-        "comments": "Margin requirement without considering margin premium converted to Euro",
-        "data_type": "NUMBER"
-      },
-      {
         "column_name": "MARGIN_CLASS",
         "comments": "Margin identifier",
         "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "PREMIUM_MARGIN",
-        "comments": "Margin premium for the corresponding margin class in original currency",
-        "data_type": "NUMBER"
       },
       {
         "column_name": "PREMIUM_MARGIN_EURO",
@@ -576,7 +326,7 @@
     ]
   },
   "ERS_V_EOD_MARGIN_SUMMARY": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
+    "author": "Author B",
     "description": "Provide end of day margins on CM-NCM-Account level",
     "comments": "- Currency conversion is done with the latest unadjusted exchange rate found prior to fact_date",
     "regression_test_config": {
@@ -590,31 +340,6 @@
       "where_query": "fact_date in (select distinct fact_date from dal_risk_o.ers_v_eod_margin_summary order by fact_date desc fetch first 5 rows only)"
     },
     "columns": [
-      {
-        "column_name": "ACCOUNT",
-        "comments": "Account identifier. \"A\" accounts are listed explicitly, all other account types (\"P\", \"M\", ...) are summarized under \"PP\"",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CLEARING_MEMBER",
-        "comments": "Member code of the clearing member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CONVERSION_FACTOR",
-        "comments": "Conversion factor used to convert from original currency to Euro",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRENCY_CODE",
-        "comments": "Original currency of the margin",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member",
-        "data_type": "VARCHAR2"
-      },
       {
         "column_name": "FACT_DATE",
         "comments": "Date on which the margin was required.",
@@ -638,7 +363,7 @@
     ]
   },
   "ERS_V_INTRADAY_MARGIN_DETAIL": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
+    "author": "Author B",
     "description": "Provide latest intraday margins on CM-NCM-Account-Margin Class level",
     "comments": "- Currency conversion is done with the latest unadjusted exchange rate found prior to fact_date - only latest available snapshot is being used - it was tried to join pool_id to this table but in certain situations the relation is not available in the margin summary table, seems to be related to the final_margin being zero.",
     "regression_test_config": {
@@ -658,26 +383,6 @@
       {
         "column_name": "ACCOUNT",
         "comments": "Account identifier. \"A\" accounts are listed explicitly, all other account types (\"P\", \"M\", ...) are summarized under \"PP\"",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CLEARING_MEMBER",
-        "comments": "Member code of the clearing member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CONVERSION_FACTOR",
-        "comments": "Conversion factor used to convert from original currency to Euro",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRENCY_CODE",
-        "comments": "Original currency of the margin",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member",
         "data_type": "VARCHAR2"
       },
       {
@@ -728,7 +433,7 @@
     ]
   },
   "ERS_V_INTRADAY_MARGIN_DETAIL_ALL": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
+    "author": "Author B",
     "description": "Provide history of intraday margins on CM-NCM-Account-Margin Class level",
     "comments": "- Currency conversion is done with the latest unadjusted exchange rate found prior to fact_date - only rows with a valid exchange rate are shown - it was tried to join pool_id to this table but in certain situations the relation is not available in the margin summary table, seems to be related to the final_margin being zero.",
     "regression_test_config": {
@@ -775,26 +480,6 @@
         "data_type": "DATE"
       },
       {
-        "column_name": "FINAL_MARGIN",
-        "comments": "Margin requirement after considering margin premium in original currency, i.e. final = initial + premium",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "FINAL_MARGIN_EURO",
-        "comments": "Margin requirement after considering margin premium converted to Euro, i.e. final = initial + premium",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "INITIAL_MARGIN",
-        "comments": "Margin requirement without considering margin premium in original currency",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "INITIAL_MARGIN_EURO",
-        "comments": "Margin requirement without considering margin premium converted to Euro",
-        "data_type": "NUMBER"
-      },
-      {
         "column_name": "MARGIN_CLASS",
         "comments": "Margin identifier",
         "data_type": "VARCHAR2"
@@ -817,7 +502,7 @@
     ]
   },
   "ERS_V_INTRADAY_MARGIN_SETTLEMENT": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
+    "author": "Author B",
     "description": "Provide latest intraday margins on CM-NCM-poolid level compared held against collaterals",
     "comments": "- Currency conversion is done with the latest unadjusted exchange rate found prior to fact_date - only latest snapsho is being provided",
     "regression_test_config": {
@@ -847,46 +532,6 @@
         "column_name": "CLEARING_MEMBER",
         "comments": "Member code of the clearing member",
         "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CONVERSION_FACTOR",
-        "comments": "Unadjusted conversion factor used to convert from original currency to Euro",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "COVERAGE",
-        "comments": "Comparison of securities and margins in original currency, i.e. coverage = (cash + security + guarantee) - margin",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "COVERAGE_EURO",
-        "comments": "Comparison of securities and margins in Euro, i.e. coverage = (cash + security + guarantee) - margin",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRENCY_CODE",
-        "comments": "Currency in which \"original\" columns are denoted",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "FACT_DATE",
-        "comments": "Latest available date",
-        "data_type": "DATE"
-      },
-      {
-        "column_name": "GUARANTEE_COLLATERAL",
-        "comments": "Intraday guarantee collateral value in original currency. This column is found in the source table. It is not clear what it contains.",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "GUARANTEE_COLLATERAL_EURO",
-        "comments": "Intraday guarantee collateral value in Euro. This column is found in the source table. It is not clear what it contains.",
-        "data_type": "NUMBER"
       },
       {
         "column_name": "POOL_ID",
@@ -921,7 +566,7 @@
     ]
   },
   "ERS_V_INTRADAY_MARGIN_SETTLEMENT_ALL": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
+    "author": "Author B",
     "description": "Provide history of all intraday margins on CM-NCM-poolid level compared held against collaterals",
     "comments": "- Currency conversion is done with the latest unadjusted exchange rate found prior to fact_date - all available snapshots are contained",
     "regression_test_config": {
@@ -949,31 +594,6 @@
       {
         "column_name": "CLEARING_MEMBER",
         "comments": "Member code of the clearing member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CONVERSION_FACTOR",
-        "comments": "Unadjusted conversion factor used to convert from original currency to Euro",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "COVERAGE",
-        "comments": "Comparison of securities and margins in original currency, i.e. coverage = (cash + security + guarantee) - margin",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "COVERAGE_EURO",
-        "comments": "Comparison of securities and margins in Euro, i.e. coverage = (cash + security + guarantee) - margin",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRENCY_CODE",
-        "comments": "Currency in which \"original\" columns are denoted",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member",
         "data_type": "VARCHAR2"
       },
       {
@@ -1007,16 +627,6 @@
         "data_type": "NUMBER"
       },
       {
-        "column_name": "SECURITY_COLLATERAL",
-        "comments": "(Intraday) security collateral value (after haircut) in original currency.",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "SECURITY_COLLATERAL_EURO",
-        "comments": "(Intraday) security collateral value (after haircut) in Euro.",
-        "data_type": "NUMBER"
-      },
-      {
         "column_name": "SNAPSHOT_TIME",
         "comments": "Time of the snapshot",
         "data_type": "VARCHAR2"
@@ -1024,7 +634,7 @@
     ]
   },
   "ERS_V_INTRADAY_MARGIN_SUMMARY": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
+    "author": "Author B",
     "description": "Provide latest intraday margins on CM-NCM-Account level",
     "comments": "- Currency conversion is done with the latest unadjusted exchange rate found prior to fact_date - only latest available snapshot is being used",
     "regression_test_config": {
@@ -1051,36 +661,6 @@
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "CONVERSION_FACTOR",
-        "comments": "Conversion factor used to convert from original currency to Euro",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRENCY_CODE",
-        "comments": "Original currency of the margin",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "FACT_DATE",
-        "comments": "Latest day with available margin data",
-        "data_type": "DATE"
-      },
-      {
-        "column_name": "POOL_ID",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "SNAPSHOT_TIME",
-        "comments": "Timestamp of the data being used",
-        "data_type": "VARCHAR2"
-      },
-      {
         "column_name": "TOTAL_MARGIN",
         "comments": "Margin requirement in original currency on CM-NCM-Account level. Cannot be negative!",
         "data_type": "NUMBER"
@@ -1103,7 +683,7 @@
     ]
   },
   "ERS_V_INTRADAY_MARGIN_SUMMARY_ALL": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
+    "author": "Author B",
     "description": "Provide history of all intraday margins on CM-NCM-Account level",
     "comments": "- Currency conversion is done with the latest unadjusted exchange rate found prior to fact_date - all available snapshots are contained",
     "regression_test_config": {
@@ -1121,36 +701,6 @@
       {
         "column_name": "ACCOUNT",
         "comments": "Account identifier. \"A\" accounts are listed explicitly, all other account types (\"P\", \"M\", ...) are summarized under \"PP\"",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CLEARING_MEMBER",
-        "comments": "Member code of the clearing member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CONVERSION_FACTOR",
-        "comments": "Conversion factor used to convert from original currency to Euro",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRENCY_CODE",
-        "comments": "Original currency of the margin",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "FACT_DATE",
-        "comments": "Date on which the margin was required.",
-        "data_type": "DATE"
-      },
-      {
-        "column_name": "POOL_ID",
-        "comments": null,
         "data_type": "VARCHAR2"
       },
       {
@@ -1181,7 +731,7 @@
     ]
   },
   "ERS_V_POOL_MAPPINGS": {
-    "author": "Christopher Schm\u00e4che (Risk Dev)",
+    "author": "Author B",
     "description": "Provide mapping between accounts and pool ids",
     "comments": "- Information is taken from end of day margin data",
     "regression_test_config": {
@@ -1201,21 +751,6 @@
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "CLEARING_MEMBER",
-        "comments": "Member code of the clearing member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "FACT_DATE",
-        "comments": "Date on which the mapping was valid.",
-        "data_type": "DATE"
-      },
-      {
         "column_name": "POOL_ID",
         "comments": "Identifier of the Pool.",
         "data_type": "VARCHAR2"
@@ -1223,7 +758,7 @@
     ]
   },
   "ERS_V_SETTLEMENT_PRICES": {
-    "author": "Christopher Schm\u00e4che (Risk DEV)",
+    "author": "Author B",
     "description": "Provide approved settlement prices in original currency and EUR for every day",
     "comments": "- MUST always be used with a date - Contains only approved settlement prices - Uses the last unadjusted exchange rate prior to fact_date found for a currency - Price in Euro cannot be calculated for first available day because exchange rate for previous day is not available",
     "regression_test_config": {
@@ -1243,21 +778,6 @@
         "column_name": "CURRENCY_CODE",
         "comments": "Currency in which the price is originally denoted.",
         "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXERCISE_PRICE",
-        "comments": "In case of an option, the exercise price of the option",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "EXPIRY_MONTH",
-        "comments": "Expiry month of the instrument",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "EXPIRY_YEAR",
-        "comments": "Expiry year of the instrument",
-        "data_type": "NUMBER"
       },
       {
         "column_name": "FACT_DATE",
@@ -1287,7 +807,7 @@
     ]
   },
   "ERS_V_SMSS_ACCOUNT": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author C",
     "description": "Provide the mapping of delivery accounts to clearing and exchange member",
     "comments": "- There are many combinations in SMSS master data where the delivery account has no sensible name, probably because no physical delivery is happening in the corresponding product groups ",
     "regression_test_config": {
@@ -1310,16 +830,6 @@
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "DELIVERY_ACCOUNT",
-        "comments": "Identifier of the delivery account",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member.",
-        "data_type": "VARCHAR2"
-      },
-      {
         "column_name": "FACT_DATE",
         "comments": "Date for which account was valid",
         "data_type": "DATE"
@@ -1327,9 +837,9 @@
     ]
   },
   "ERS_V_SMSS_ACCOUNT_DETAILS": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author C",
     "description": "Provide list of product groups valid for all clearing and exchange member",
-    "comments": "- you must run it for a specific date (FACT_DATE) - take the date from the EEX calender (so we a date and not a date range) - use that date by searching for a matching valid_from / to daterange - uses DAL_SMSS_SETTLEMENT_MEMBER_PG as central table to collect all dat - has more than one product mapped to the account",
+    "comments": "- you must run it for a specific date (FACT_DATE) - take the date from the business calender (so we a date and not a date range) - use that date by searching for a matching valid_from / to daterange - uses DAL_SMSS_SETTLEMENT_MEMBER_PG as central table to collect all dat - has more than one product mapped to the account",
     "regression_test_config": {
       "comparison_key": [
         "CLEARING_MEMBER",
@@ -1354,21 +864,6 @@
         "column_name": "DELIVERY_ACCOUNT",
         "comments": "Identifier of the account",
         "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "DELIVERY_POINT",
-        "comments": "Point ( who will deliver the product (Netzbetreiber)",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHANGE_MEMBER",
-        "comments": "Member code of the exchange member.",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "FACT_DATE",
-        "comments": "Date for which account was valid",
-        "data_type": "DATE"
       },
       {
         "column_name": "PRODUCT_GROUP",
