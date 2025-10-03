@@ -1,6 +1,6 @@
 {
   "RISK_V_ADJUSTED_EXCHANGE_RATES": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "To get the end of day exchange rates",
     "comments": "- Always uses the currency from the previous day as the current day is not available or MAX date.",
     "regression_test_config": {
@@ -12,7 +12,7 @@
       "columns_to_ignore": [
         "IMPTIM"
       ],
-      "where_query": "trandat in (select distinct trandat from dal_risk_o.risk_v_adjusted_exchange_rates order by trandat desc fetch  first 5 rows only)"
+      "where_query": "trandat in (select distinct trandat from table order by trandat desc fetch  first 5 rows only)"
     },
     "columns": [
       {
@@ -23,26 +23,6 @@
       {
         "column_name": "ADJEXCHRATDEB",
         "comments": "debit exchange rates",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRTYPCOD",
-        "comments": "source currency code",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EURCURRTYPCOD",
-        "comments": "target currency code",
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "EXCHRAT",
-        "comments": "exchange rate",
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "HAIRCUTPCNT",
-        "comments": "conversion factor to convert target currency from source currency",
         "data_type": "NUMBER"
       },
       {
@@ -58,16 +38,13 @@
     ]
   },
   "RISK_V_ALL_POS_DELIVERY_OPEN": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "This is an outdated view and not used anymore.",
     "comments": "Shows the the snapshot of the positions and no more details.",
     "regression_test_config": {
       "comparison_key": [
         "RPT_DATE",
-        "MEMBCLGIDCOD",
-        "MEMBEXCHIDCOD",
         "CURRTYPCOD",
-        "ACCTTYPGRP",
         "PRODID",
         "CNTREXPYRDAT",
         "CNTREXPMTHDAT"
@@ -76,21 +53,6 @@
     "columns": [
       {
         "column_name": "ACCTTYPGRP",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CNTREXPMTHDAT",
-        "comments": null,
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CNTREXPYRDAT",
-        "comments": null,
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "CURRTYPCOD",
         "comments": null,
         "data_type": "VARCHAR2"
       },
@@ -125,11 +87,6 @@
         "data_type": "DATE"
       },
       {
-        "column_name": "SUMTRNLNGQTY",
-        "comments": null,
-        "data_type": "NUMBER"
-      },
-      {
         "column_name": "SUMTRNSHTQTY",
         "comments": null,
         "data_type": "NUMBER"
@@ -137,9 +94,9 @@
     ]
   },
   "RISK_V_AUCTION_CALENDAR": {
-    "author": "Marc Kullmann (Risk DEV)",
-    "description": "Provides the auction days for EEX and EPEX Spot",
-    "comments": "Use the view to get the auction days for EEX and EPEX Spot auctions",
+    "author": "Author F",
+    "description": "Provides the auction days",
+    "comments": "Use the view to get the auction days",
     "regression_test_config": {
       "comparison_key": [
         "AUCTIONING_MONTH",
@@ -155,16 +112,6 @@
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "CLOSURE_OF_ORDER_BOOK",
-        "comments": "The Auction Closure or auction day for the Limit Definition.",
-        "data_type": "DATE"
-      },
-      {
-        "column_name": "LIMIT_DEFINITION",
-        "comments": "The Limit Definition which has its auction closure.",
-        "data_type": "VARCHAR2"
-      },
-      {
         "column_name": "PRODUCT",
         "comments": "The product to which the Limit Definition belongs.",
         "data_type": "VARCHAR2"
@@ -172,9 +119,9 @@
     ]
   },
   "RISK_V_BOM_CASCADING_DATA": {
-    "author": "Stuti Sanghavi (Risk DEV)",
-    "description": "Provide BOM Cascading Data from ECC Website",
-    "comments": "- Used for AMBO Implementation to get the remaining_contract_size",
+    "author": "Author E",
+    "description": "Provide some Data from the Website",
+    "comments": "- Used for an Implementation to get the remaining_contract_size",
     "regression_test_config": {
       "comparison_key": [
         "FACT_DATE",
@@ -187,33 +134,13 @@
         "FACT_ID",
         "FACT_TIMESTAMP"
       ],
-      "where_query": "fact_date in (select distinct fact_date from dal_risk_o.risk_v_bom_cascading_data order by fact_date desc fetch  first 3 rows only)"
+      "where_query": "fact_date in (select distinct fact_date from table.data order by fact_date desc fetch first 3 rows only)"
     },
     "columns": [
       {
         "column_name": "CONTRACT_SIZE",
         "comments": null,
         "data_type": "NUMBER"
-      },
-      {
-        "column_name": "DELIVERY_SIZE",
-        "comments": null,
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "FACT_DATE",
-        "comments": null,
-        "data_type": "DATE"
-      },
-      {
-        "column_name": "FACT_ID",
-        "comments": null,
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "FACT_TIMESTAMP",
-        "comments": null,
-        "data_type": "TIMESTAMP(9)"
       },
       {
         "column_name": "FILENAME",
@@ -248,9 +175,9 @@
     ]
   },
   "RISK_V_CLEARER_CHANGE": {
-    "author": "Steffen Kohla (Risk DEV)",
-    "description": "Provide CM-NCM-relation using SMSS hist table",
-    "comments": "- used by MMS for EoD run",
+    "author": "Author A",
+    "description": "Provide CM-NCM-relation using the hist table",
+    "comments": "- used for EoD run",
     "regression_test_config": {
       "comparison_key": [
         "MEMBER_ID",
@@ -267,16 +194,6 @@
         "data_type": "DATE"
       },
       {
-        "column_name": "CLEARER_ID_NEW",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "CLEARER_ID_OLD",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
         "column_name": "ID",
         "comments": null,
         "data_type": "NUMBER"
@@ -289,15 +206,12 @@
     ]
   },
   "RISK_V_CLOSEOUT_CALC": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Performs Closeout Monitoring for all physically settled products",
     "comments": "- No input required. Runs closeout on positions for latest fact_date.",
     "regression_test_config": {
       "comparison_key": [
-        "NON_CLEARING_MEMBER",
-        "ECC_COMMODITY",
-        "ECC_EXCHANGE",
-        "ECC_DELIVERY_POINT"
+        "NON_CLEARING_MEMBER"
       ],
       "columns_to_ignore": [
         "RPT_TIME"
@@ -306,21 +220,6 @@
     "columns": [
       {
         "column_name": "CLEARING_MEMBER",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "ECC_COMMODITY",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "ECC_DELIVERY_POINT",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "ECC_EXCHANGE",
         "comments": null,
         "data_type": "VARCHAR2"
       },
@@ -357,7 +256,7 @@
     ]
   },
   "RISK_V_CONTRACT_DETAILS": {
-    "author": "Christopher Schmaeche (Risk DEV)",
+    "author": "Author B",
     "description": "Provide relevant contract data for Stresstest application",
     "comments": "- Fact_date required as input - Provides data that can be defined on contract level which is defined by product code, expiry year and expiry month - For futures 'contract' is the same as 'instrument' - For options 'contract' does *not* include call put flag and exercise price - The source table contains data on instrument level, thus option contract data would be duplicated if not filtered, because it is the same for each combination of call put flag and exercise price. In order to deduplicate, we partition by primary key and sort by call_put_flag and exercise_price. Finally we take the first one we find for each primary key.",
     "regression_test_config": {
@@ -419,21 +318,6 @@
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "UNDERLYING_CONTRACT_CODE",
-        "comments": null,
-        "data_type": "VARCHAR2"
-      },
-      {
-        "column_name": "UNDERLYING_EXPIRY_MONTH",
-        "comments": null,
-        "data_type": "NUMBER"
-      },
-      {
-        "column_name": "UNDERLYING_EXPIRY_YEAR",
-        "comments": null,
-        "data_type": "NUMBER"
-      },
-      {
         "column_name": "UNDERLYING_PRODUCT_CODE",
         "comments": null,
         "data_type": "VARCHAR2"
@@ -441,7 +325,7 @@
     ]
   },
   "RISK_V_DEPRECATED_MARKTVALUES_MR": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "This is a deprecated view. Combines CurrenyRates, Auction Prices and Settlement Prices.",
     "comments": "- Since it is an MR view, shows the most recent only",
     "regression_test_config": {
@@ -474,7 +358,7 @@
     ]
   },
   "RISK_V_DMS_BALANCES": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Get account details for balances",
     "comments": "- This view gave errors with DAL_REF_DAILY_BALANCES_OFFSET in the schema DAL_IDP_O - This view removes dependency on the DAL_IDP_O.DAL_REF_DAILY_BALANCES_OFFSET",
     "regression_test_config": {
@@ -534,7 +418,7 @@
     ]
   },
   "RISK_V_DMS_DAILY_BALANCES": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "To get daily balances for delivery accounts This view doesnt have any dependency on DAL_IDP_O.DAL_REF_DAILY_BALANCES_OFFSET anymore, instead it uses data from DAL_RISK_O.DAL_SMSS_DMS_DAILY_BALANCES itself",
     "comments": null,
     "regression_test_config": {
@@ -583,7 +467,7 @@
       }
     ]
   },
-  "RISK_V_EEX_BUSINESS_CALENDAR": {
+  "RISK_V_XXX_BUSINESS_CALENDAR": {
     "author": null,
     "description": null,
     "comments": null,
@@ -685,7 +569,7 @@
       }
     ]
   },
-  "RISK_V_EEX_CALENDAR": {
+  "RISK_V_XXX_CALENDAR": {
     "author": null,
     "description": null,
     "comments": null,
@@ -729,7 +613,7 @@
         "data_type": "NUMBER"
       },
       {
-        "column_name": "HANDELSTAG_ECC",
+        "column_name": "HANDELSTAG_XXX",
         "comments": null,
         "data_type": "NUMBER"
       },
@@ -750,7 +634,7 @@
       }
     ]
   },
-  "RISK_V_EEX_INSTRUMENT": {
+  "RISK_V_XXX_INSTRUMENT": {
     "author": null,
     "description": null,
     "comments": null,
@@ -855,7 +739,7 @@
       }
     ]
   },
-  "RISK_V_EEX_PRODUCT": {
+  "RISK_V_XXX_PRODUCT": {
     "author": null,
     "description": null,
     "comments": null,
@@ -918,32 +802,32 @@
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "ECC_COMMODITY",
+        "column_name": "XXX_COMMODITY",
         "comments": null,
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "ECC_CONVERSION_UOM",
+        "column_name": "XXX_CONVERSION_UOM",
         "comments": null,
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "ECC_DELIVERY_POINT",
+        "column_name": "XXX_DELIVERY_POINT",
         "comments": null,
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "ECC_EXCHANGE",
+        "column_name": "XXX_EXCHANGE",
         "comments": null,
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "ECC_TRANSACTION_TYPE",
+        "column_name": "XXX_TRANSACTION_TYPE",
         "comments": null,
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "ECC_UOM",
+        "column_name": "XXX_UOM",
         "comments": null,
         "data_type": "VARCHAR2"
       },
@@ -1262,7 +1146,7 @@
     ]
   },
   "RISK_V_EOD_DAILY_MARGIN_EUR": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Converts all values to hard-coded EUR (MMS requirement)",
     "comments": "- Must ALWAYS be used together with a date (since it contains the whole history) - but converts all to EUR - converts all M%, G% P% Accounts to PP (MMS requirement)",
     "regression_test_config": {
@@ -2091,7 +1975,7 @@
     ]
   },
   "RISK_V_EOD_SETTL_PRICES_OI": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "provides settlement prices from MDH for all products (to replace the inside market usage)",
     "comments": "- MUST always be used with a date - As it one view for options and derivatives, so PRODUCT_LINE can be used to distinguish (F, O, S) - uses always the latest snapshot for the day - IMPORTENT!!! Filter on INST_SETUP_COMPLETE = 1 to get only correct setup products",
     "regression_test_config": {
@@ -2283,7 +2167,7 @@
     ]
   },
   "RISK_V_INSTRUMENTS": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Provide a 1:1 view to dal_instrument",
     "comments": " Fact_date required as input - Provides all instrument details - for Risk you should filter on 'C7' - ensure to take the last delivery for a day",
     "regression_test_config": {
@@ -2381,42 +2265,42 @@
         "data_type": "DATE"
       },
       {
-        "column_name": "ECC_COMMODITY",
+        "column_name": "XXX_COMMODITY",
         "comments": null,
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "ECC_CONVERSION_UNIT",
+        "column_name": "XXX_CONVERSION_UNIT",
         "comments": null,
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "ECC_DELIVERY_POINT",
+        "column_name": "XXX_DELIVERY_POINT",
         "comments": null,
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "ECC_EXCHANGE",
+        "column_name": "XXX_EXCHANGE",
         "comments": null,
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "ECC_UNIT_OF_MEASURE",
+        "column_name": "XXX_UNIT_OF_MEASURE",
         "comments": null,
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "EEX_INSTRUMENT_ID",
+        "column_name": "XXX_INSTRUMENT_ID",
         "comments": null,
         "data_type": "NUMBER"
       },
       {
-        "column_name": "EEX_PRODUCT_ID",
+        "column_name": "XXX_PRODUCT_ID",
         "comments": null,
         "data_type": "NUMBER"
       },
       {
-        "column_name": "EEX_TICK_SIZE",
+        "column_name": "XXX_TICK_SIZE",
         "comments": null,
         "data_type": "NUMBER"
       },
@@ -2501,7 +2385,7 @@
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "INSTRUMENT_CODE_EEX",
+        "column_name": "INSTRUMENT_CODE_XXX",
         "comments": null,
         "data_type": "VARCHAR2"
       },
@@ -2606,7 +2490,7 @@
         "data_type": "VARCHAR2"
       },
       {
-        "column_name": "PRODUCT_CODE_EEX",
+        "column_name": "PRODUCT_CODE_XXX",
         "comments": null,
         "data_type": "VARCHAR2"
       },
@@ -2845,7 +2729,7 @@
     ]
   },
   "RISK_V_INTRA_DAILY_MARGIN_ALL": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "shows all values + EURO converation",
     "comments": "- aka CI750 - Must ALWAYS be used together with a date (since it contains the whole history) - pick a shapshot (it containsall shapshotfor the day) - contains all values + euro conversion",
     "regression_test_config": {
@@ -2978,7 +2862,7 @@
     ]
   },
   "RISK_V_INTRA_DAILY_MARGIN_EUR": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Converts all values to hard-coded EUR (MMS requirement)",
     "comments": "- aka CI750 - converts all to EUR - converts all M%, G% P% Accounts to PP (MMS requirement. I found occurances) - it contains multiple snapshot for a day, so select one using RPT_TIME",
     "regression_test_config": {
@@ -3253,7 +3137,7 @@
     ]
   },
   "RISK_V_INTRA_DAILY_SETTLEMENT_ALL": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "provides all values and covert to EUR aka. CI042",
     "comments": "- Must ALWAYS be used together with a date (since it contains the whole history) - pick a shapshot (it containsall shapshotfor the day) - contains all values + euro conversion",
     "regression_test_config": {
@@ -3403,7 +3287,7 @@
     ]
   },
   "RISK_V_INTRA_DAILY_SETTLEMENT_EUR": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Converts all values to hard-coded EUR (MMS requirement) aka CI042",
     "comments": "- converts all to EUR - it contains multiple snapshots for a day, so SELECT one using RPT_TIME",
     "regression_test_config": {
@@ -3503,7 +3387,7 @@
     ]
   },
   "RISK_V_INTRA_MATCH_SETTL_2_VARPREM": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Get the rpt_time where we have entry in DAL_INTRA_DAILY_SETTLEMENT AND DAL_INTRA_VAR_PREM",
     "comments": "- ALWAYS provide a FACT_DATE, otherwise it will run for ages.",
     "regression_test_config": {
@@ -3786,7 +3670,7 @@
     ]
   },
   "RISK_V_INTRA_POSITION_DETAIL_ALL": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "provides all values and covert to  EUR",
     "comments": "- Must ALWAYS be used together with a date (since it contains the whole history) - pick a shapshot (it containsall shapshotfor the day) - contains all values + euro conversion",
     "regression_test_config": {
@@ -4066,7 +3950,7 @@
     ]
   },
   "RISK_V_INTRA_POSITION_DETAIL_EUR": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Converts all values to hard-coded EUR (MMS requirement)",
     "comments": "- CI420 (CI012) - converts all values to EUR - it contains multiple snapshot for a day, so select one using RPT_TIME - converts all M%, G% P% Accounts to PP (MMS requirement. I found occurances)",
     "regression_test_config": {
@@ -4326,7 +4210,7 @@
     ]
   },
   "RISK_V_INTRA_POSITION_DETAIL_EUR_NOEOD": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Sums up all current positions per member, account AND product",
     "comments": "Usage: - CI420 (CI012) - Since it is a MR view, shows you the most recent only - but filter all EoD Transactions 'END' , '104' , '116' , '126' - This view is a 1:1 replacement of the LZDB version - This view does not show valid values for option, since it does NOT consider the exercise price to the call/put flag. Since this behavior was also present in the original view, I did not fix it.",
     "regression_test_config": {
@@ -4586,7 +4470,7 @@
     ]
   },
   "RISK_V_INTRA_POS_DETAIL_SUM_MR": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Sums up all current positions per member, account AND product",
     "comments": "- CI420 (CI012) - Since it is an MR view, shows you the most recent only - This view is a 1:1 replacement of the LZDB version - This view does not show valid values for option, since it does NOT consider the exercise price to the call/put flag. Since this behavior was also present in the original view, I did not fix it.",
     "regression_test_config": {
@@ -4766,7 +4650,7 @@
     ]
   },
   "RISK_V_INTRA_VAR_PREM_E11_ALL": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "provides all values and coverion to EUR aka CI140",
     "comments": "Must ALWAYS be used together with a date (since it contains the whole history) - pick a shapshot (it containsall shapshotfor the day) - contains all values + euro conversion",
     "regression_test_config": {
@@ -4900,7 +4784,7 @@
     ]
   },
   "RISK_V_INTRA_VAR_PREM_E11_EUR": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Converts all values to hard-coded EUR (MMS requirement) aka CI140",
     "comments": "- converts all values to EUR - it contains multiple snapshots for a day, so select one using RPT_TIME - and converts all M%, G% P% Accounts to PP (MMS requirement. I could not find any occurance).",
     "regression_test_config": {
@@ -4999,7 +4883,7 @@
     ]
   },
   "RISK_V_LATEST_FCT_LOAD_STATUS": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Shows latest techncial update and lastest busiess fact for used Risk tables",
     "comments": "- run as is, it's most recent - 01.01.1970 is default - add lastets entries from load_status - add lastets date for load_status - BDWH-12280",
     "regression_test_config": {
@@ -5564,7 +5448,7 @@
         "data_type": "DATE"
       },
       {
-        "column_name": "INVOICERELEVANTDATEEXCHANGEFEE",
+        "column_name": "INVOICERELEVANTDATXXXCHANGEFEE",
         "comments": null,
         "data_type": "DATE"
       },
@@ -5696,14 +5580,14 @@
     ]
   },
   "RISK_V_SETTLEMENT_PRICE": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "provides settlement prices from MDH for all products",
     "comments": "- MUST always be used with a date - Contains the unapproved and approved prices (so filter by PRICE_APPROVED = 1 for approved) - But only one unapproved and approved prices (the lastest of it), there are days, when we get more than one",
     "regression_test_config": {
       "comparison_key": [
         "FACT_DATE",
         "FACT_TIMESTAMP",
-        "INSTRUMENT_CODE_EEX",
+        "INSTRUMENT_CODE_XXX",
         "SOURCE_CODE"
       ],
       "columns_to_ignore": [
@@ -5751,7 +5635,7 @@
         "data_type": "TIMESTAMP(9)"
       },
       {
-        "column_name": "INSTRUMENT_CODE_EEX",
+        "column_name": "INSTRUMENT_CODE_XXX",
         "comments": null,
         "data_type": "VARCHAR2"
       },
@@ -6540,7 +6424,7 @@
     ]
   },
   "RISK_V_TRADE_CONFIRMATION": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Get account details for balances",
     "comments": "- This view provides you with the Trades, as delivered from C7 (based on positions) - No intraday update - It can be used SoD the next day (The Position gets delivered EoD, but the link account statement SoD) - Fact_date required as input",
     "regression_test_config": {
@@ -6755,7 +6639,7 @@
     ]
   },
   "RISK_V_TRADE_STATISTICS": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Provides TD930",
     "comments": "- run with Fact_date - takes daily instuments source 'C7' - add DAL_TRADE_STATISTICS (open low prices) - add previosSettlement price - add OI - add current settlement price - add underlyings",
     "regression_test_config": {
@@ -6918,7 +6802,7 @@
     ]
   },
   "RISK_V_VIRTUAL_OPTION_STRIKE_MR": {
-    "author": "Steffen Kohla (Risk DEV)",
+    "author": "Author A",
     "description": "Provide Most recent data of virtual option strikes",
     "comments": "- run as is - contains most recent data per contract - Query rawdata, but member final and call option only - shows lastest data per contract",
     "regression_test_config": {
