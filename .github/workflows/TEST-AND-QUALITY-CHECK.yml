@@ -28,7 +28,7 @@ jobs:
         #   python-version: '3.12'
 
       - name: Install Dependencies
-        run: pip install -e .[dev]
+        run: pip install .[dev]
 
       - name: run black
         run: tox -e black
