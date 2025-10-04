@@ -30,11 +30,14 @@ jobs:
       - name: create virtual environment
         run: python3 -m venv venv
       
+      - name: Activabte virtusal environment
+        run: source venv/bin/activate
+      
       - name: Upgrade pip
-        run: python3 venv/bin/pip install --upgrade pip
+        run: python3 pip install --upgrade pip
 
       - name: Install Dependencies
-        run: venv/bin/pip install ".[dev, tox]"
+        run: pip install ".[dev, tox]"
 
       - name: run black
         run: tox -e black
