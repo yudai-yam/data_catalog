@@ -31,7 +31,7 @@ def build():
     # iterate through inputs, each db
     for input_path in input_paths:
 
-        print(f"Building {input_path}")
+        logging.info(f"Building {input_path}")
         json_input = load_json(input_path)
 
         if json_input is None:
