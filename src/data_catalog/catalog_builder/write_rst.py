@@ -81,15 +81,15 @@ def write_db_index(db: str, output_folder: Path):
     """
     file_name = db_index_file.name
 
-    if db.upper() == "BDWH_ERS":
+    if db.upper() == "EXAMPLE_DB_1":
         context = {
             "db_name": db,
-            "index_description": "This is a collection of BDWH tables that are prefixed as `ERS_`.",
+            "index_description": "This is a collection of insightful tables that are classified as `first` in terms of confidentiality. Dummy DB.",
         }
-    elif db.upper() == "BDWH_RISK":
+    elif db.upper() == "EXAMPLE_DB_2":
         context = {
             "db_name": db,
-            "index_description": "This is a collection of BDWH tables that are prefixed as `RISK_`.",
+            "index_description": "This is a collection of tables that are classified as `second`. Dummy DB.",
         }
     else:
         context = {"db_name": db, "index_description": "This is a collection of tables"}
