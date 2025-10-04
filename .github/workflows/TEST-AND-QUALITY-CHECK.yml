@@ -18,11 +18,11 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Checkout the repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
       
       - name: Set up Python
         # This is the version of the action for setting up Python, not the Python version.
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         # with:
         #   # Semantic version range syntax or exact version of a Python version
         #   python-version: '3.12'
@@ -30,8 +30,9 @@ jobs:
       - name: create virtual environment and install dependencies
         run: | 
             python3 -m venv venv
+            source venv/bin/activate
             python3 -m pip install --upgrade pip
-            venv/bin/pip install ".[dev, tox]"
+            pip install ".[dev, tox]"
       
       # - name: Activabte virtusal environment
       
@@ -40,7 +41,9 @@ jobs:
       # - name: Install Dependencies
 
       - name: run black
-        run: venv/bin/tox -e black
+        run: | 
+            source venv/bin/activate
+            tox -e black
 
       - name: run flake8
         run: tox -e flake8
