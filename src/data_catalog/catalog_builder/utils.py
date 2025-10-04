@@ -17,7 +17,9 @@ def load_json(input_file: Path) -> dict:
             data = json.load(f)
             return data
 
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         logging.error(f"File {input} not found.")
-    except json.decoder.JSONDecodeError:
+        raise e
+    except json.decoder.JSONDecodeError as e:
         logging.error(f"File {input} could not be decoded.")
+        raise e

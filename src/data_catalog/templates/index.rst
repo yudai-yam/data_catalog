@@ -1,7 +1,7 @@
 Data Catalog
 =================
 
-Developed by Risk Development team.
+Developed by Yudai.
 
 .. toctree::
     :maxdepth: 2

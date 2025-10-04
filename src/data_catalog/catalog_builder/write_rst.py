@@ -3,7 +3,13 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from data_catalog.catalog_builder.config import template_dir
+from data_catalog.catalog_builder.config import (
+    db_index_file,
+    db_list_file,
+    index_file,
+    table_list_file,
+    template_dir,
+)
 
 
 def render_template(template_name: str, context: dict, output_path: Path):
@@ -25,6 +31,7 @@ def render_template(template_name: str, context: dict, output_path: Path):
         logging.info(f"Wrote to {output_path}")
     except IOError as e:
         logging.error(f"Could not write to {output_path}: {e}")
+        raise e
 
 
 def write_table(json_input: dict, output_folder: Path):
@@ -58,7 +65,7 @@ def write_table_list(db: str, json_input: dict, output_folder: Path):
         output_folder: location to write the rst file
 
     """
-    file_name = "table_list.rst"
+    file_name = table_list_file.name
 
     # create rst for each table
     context = {
@@ -78,17 +85,17 @@ def write_db_index(db: str, output_folder: Path):
         output_folder: the location to write the rst file
 
     """
-    file_name = "db_index.rst"
+    file_name = db_index_file.name
 
-    if db.upper() == "BDWH_ERS":
+    if db.upper() == "EXAMPLE_DB_1":
         context = {
             "db_name": db,
-            "index_description": "This is a collection of BDWH tables that are prefixed as `ERS_`.",
+            "index_description": "This is a collection of insightful tables that are classified as `first` in terms of confidentiality. Dummy DB.",
         }
-    elif db.upper() == "BDWH_RISK":
+    elif db.upper() == "EXAMPLE_DB_2":
         context = {
             "db_name": db,
-            "index_description": "This is a collection of BDWH tables that are prefixed as `RISK_`.",
+            "index_description": "This is a collection of tables that are classified as `second`. Dummy DB.",
         }
     else:
         context = {"db_name": db, "index_description": "This is a collection of tables"}
@@ -105,7 +112,7 @@ def write_inputs(input_paths: list, output_folder: Path):
 
     """
     db_list = [path.stem for path in input_paths]
-    file_name = "db_list.rst"
+    file_name = db_list_file.name
 
     context = {
         "inputs": db_list,
@@ -121,13 +128,12 @@ def write_index(output_folder: Path):
         output_folder: the location to write the rst file
 
     """
-    file_name = "index.rst"
+    file_name = index_file.name
 
     index_description = """
         This page hosts a data catalog of databases.
-        This page can be updated through a successful PR to the master branch of data_catalog repository: https://github.deutsche-boerse.de/EXG-dev-confidential/exg.app.ers.data_catalog.
+        This page can be updated through a successful PR to the master branch of data_catalog repository: https://github.com/yudai-yam/data_catalog.
         Refer the ``README.rst`` in the repository for more information.
-        Note that this repository is currently under development.
     """
 
     context = {

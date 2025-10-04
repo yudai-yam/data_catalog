@@ -1,7 +1,7 @@
 {{db_name}}
 ============
 
-Rendered build for repository:  `exg.app.ers.data_catalog <https://github.deutsche-boerse.de/EXG-dev-confidential/exg.app.ers.data_catalog>`_
+Rendered build for repository:  `exg.app.ers.data_catalog <https://github.com/yudai-yam/data_catalog>`_
 
 .. toctree::
     :maxdepth: 2
