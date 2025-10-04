@@ -27,11 +27,12 @@ jobs:
         #   # Semantic version range syntax or exact version of a Python version
         #   python-version: '3.12'
       
-      - name: create virtual environment
-        run: python3 -m venv venv
-             source venv/bin/activate
-             python3 -m pip install --upgrade pip
-             pip install ".[dev, tox]"
+      - name: create virtual environment and install dependencies
+        run: | 
+            python3 -m venv venv
+            source venv/bin/activate
+            python3 -m pip install --upgrade pip
+            pip install ".[dev, tox]"
       
       # - name: Activabte virtusal environment
       
