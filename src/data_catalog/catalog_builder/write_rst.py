@@ -3,7 +3,13 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from data_catalog.catalog_builder.config import template_dir, table_list_file, db_index_file, db_list_file, index_file
+from data_catalog.catalog_builder.config import (
+    db_index_file,
+    db_list_file,
+    index_file,
+    table_list_file,
+    template_dir,
+)
 
 
 def render_template(template_name: str, context: dict, output_path: Path):

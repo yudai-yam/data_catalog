@@ -5,8 +5,8 @@ Data Catalog Generation API Readme
 
 General Information
 -------------------
-- Data catalog page: https://pages.github.deutsche-boerse.de/EXG-dev-confidential/exg.app.ers.data_catalog
-- Source Code: https://github.deutsche-boerse.de/EXG-dev-confidential/exg.app.ers.data_catalog
+- Data catalog page: https://pages.github.com/yudai-yam/data_catalog
+- Source Code: https://github.com/yudai-yam/data_catalog
 
 Short Description / Background
 ------------------------------
@@ -19,7 +19,7 @@ The whole pipeline is shown in the image below.
 .. image:: pipeline.png
     :width: 800
 
-The first three steps, namely Inputs, Conversion Layer, and Json inputs are to be taken care of outside of
+The first three steps, namely Inputs, Conversion Layer, and json inputs are to be taken care of outside of
 this data catalog program.
 
 Project Structure
@@ -29,7 +29,7 @@ Project Structure
 
     ers.data_catalog
     ├── src
-    │   ├──bdwh_extract
+    │   ├──db_extract
     │   │    ├── utils
     │   │    ├── .env
     │   │    ├── config.py
@@ -46,9 +46,9 @@ Project Structure
     └── inputs
 
 
-bdwh_extract
+db_extract
 ^^^^^^^^^^^^
-Contains scripts for extracting data from BDWH database as a JSON file.
+Contains scripts for extracting data from database as a JSON file.
 
 data_catalog
 ^^^^^^^^^^^^
@@ -121,7 +121,7 @@ Generate HTML files from the RST files.
 JSON Template
 -------------
 A key for each entry is a table name. Note that the file name
-(ex. ``BDWH.json``) is recognized as the name of DB, and displayed in the page.
+(ex. ``DB.json``) is recognized as the name of DB, and displayed in the page.
 These files must be stored in the `inputs directory`_.
 
 
@@ -169,7 +169,7 @@ These files must be stored in the `inputs directory`_.
 
     {
       TABLE_NAME: {
-        "author": "Steffen Kohla (Risk DEV)",
+        "author": "Table Author Name",
         "description": "To get the end of day exchange rates",
         "comments": [
           "run as it is",
@@ -202,7 +202,7 @@ These files must be stored in the `inputs directory`_.
         ]
       },
       TABLE_NAME: {
-        "author": "Christopher Schmaeche (Risk DEV)",
+        "author": "Author Name",
         "description": "Provide relevant contract data for Stresstest application",
         "comments": [
             "contains all values",
