@@ -29,6 +29,9 @@ jobs:
       
       - name: create virtual environment
         run: python3 -m venv venv
+      
+      - name: Upgrade pip
+        run: python3 -m venv/bin/pip install --upgrade pip
 
       - name: Install Dependencies
         run: venv/bin/pip install .[dev, tox]
