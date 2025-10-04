@@ -30,9 +30,8 @@ jobs:
       - name: create virtual environment and install dependencies
         run: | 
             python3 -m venv venv
-            source venv/bin/activate
             python3 -m pip install --upgrade pip
-            pip install ".[dev, tox]"
+            venv/bin/pip install ".[dev, tox]"
       
       # - name: Activabte virtusal environment
       
@@ -41,7 +40,7 @@ jobs:
       # - name: Install Dependencies
 
       - name: run black
-        run: tox -e black
+        run: venv/bin/tox -e black
 
       - name: run flake8
         run: tox -e flake8
