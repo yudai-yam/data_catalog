@@ -57,11 +57,12 @@ jobs:
 
       - name: run the pipline
         run: |
-           ./venv/bin/build
-           ls -lah
+            source venv/bin/activate
+            build
       
       - name: Debug output structure
         run: |
+          source venv/bin/activate
           echo "Current directory: $(pwd)"
           
       - name: Upload the page to artifact
