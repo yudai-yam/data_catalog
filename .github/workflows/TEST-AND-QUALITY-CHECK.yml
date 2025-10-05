@@ -38,6 +38,8 @@ jobs:
         run: | 
           pip install --upgrade pip
           pip install ".[dev, tox]"
+          ls -lah inputs/
+          
       
       - name: ls
         run: ls -lah inputs/
