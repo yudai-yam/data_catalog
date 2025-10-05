@@ -2,11 +2,11 @@ name: TEST-AND-QUALITY-CHECK
 
 on:
   push:
-  #   branches:
-  #     - master
-  # pull_request:
-  #   branches:
-  #     - master
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 defaults:
   run:
@@ -23,10 +23,6 @@ jobs:
       - name: Set up Python
         # This is the version of the action for setting up Python, not the Python version.
         uses: actions/setup-python@v5
-        # with:
-        #   # Semantic version range syntax or exact version of a Python version
-        #   python-version: '3.12'
-      
 
       - name: Activate virtualenv
         run: |
@@ -40,7 +36,6 @@ jobs:
           pip install ".[dev, tox]"
           ls -lah inputs/
           
-      
       - name: ls
         run: ls -lah inputs/
 
