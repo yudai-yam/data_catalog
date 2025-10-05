@@ -34,6 +34,7 @@ jobs:
             python3 -m pip install --upgrade pip
             pip install ".[dev, tox]"
             ls /home/yudai/Codes/actions-runner/_work/data_catalog/data_catalog/venv/lib/python3.12/site-packages/data_catalog/templates/
+            ls /home/yudai/Codes/actions-runner/_work/data_catalog/data_catalog/venv/lib/python3.12/site-packages/data_catalog/
 
       
       # - name: Activabte virtusal environment
@@ -50,6 +51,8 @@ jobs:
       - name: debug
         run: ls /home/yudai/Codes/actions-runner/_work/data_catalog/data_catalog/venv/lib/python3.12/site-packages/data_catalog/templates/
 
+      - name: debug
+        run: ls /home/yudai/Codes/actions-runner/_work/data_catalog/data_catalog/venv/lib/python3.12/site-packages/data_catalog/
 
       - name: run flake8
         run: |  
