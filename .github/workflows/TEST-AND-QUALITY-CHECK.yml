@@ -34,33 +34,18 @@ jobs:
         run: | 
           pip install --upgrade pip
           pip install ".[dev, tox]"
-          ls -lah inputs/
           
-      - name: ls
-        run: ls -lah inputs/
-
       - name: run black
-        run: | 
-             tox -e black
+        run: tox -e black
       
       - name: run flake8
-        run: |  
-            tox -e flake8
+        run: tox -e flake8
 
       - name: run isort
-        run: | 
-            tox -e isort
+        run: tox -e isort
 
       - name: run the pipline
-        run: |
-            dev
-        env:
-            INPUT_DIR: inputs
-      
-      - name: Debug output structure
-        run: |
-          echo "Current directory: $(pwd)"
-          ls -lah
+        run: dev
           
       - name: Upload the page to artifact
         uses: actions/upload-pages-artifact@v3
