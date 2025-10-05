@@ -43,22 +43,21 @@ jobs:
       - name: run black
         run: | 
             source venv/bin/activate
-            tox -e black
+             ./venv/bin/tox -e black
       
       - name: run flake8
         run: |  
             source venv/bin/activate
-            tox -e flake8
+            ./venv/bin/tox -e flake8
 
       - name: run isort
         run: | 
             source venv/bin/activate
-            tox -e isort
+            ./venv/bin/tox -e isort
 
       - name: run the pipline
         run: |
-          source venv/bin/activate
-          build
+           ./venv/bin/build
           
       - name: Upload the page to artifact
         uses: actions/upload-pages-artifact@v3
