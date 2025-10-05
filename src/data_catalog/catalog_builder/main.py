@@ -28,6 +28,8 @@ def build():
     write_inputs(input_paths, rst_dir)
     write_index(rst_dir)
 
+    logging.info(f"Input directory: {inputs_dir}")
+
     # iterate through inputs, each db
     for input_path in input_paths:
 
