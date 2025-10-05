@@ -35,7 +35,7 @@ dev = "data_catalog.main:dev"
 readme = {file = ["README.rst"]}
 
 [tool.setuptools.packages.find]
-where = ["templates"]
+where = ["data_catalog"]
 
 [project.optional-dependencies]
 extract = [
