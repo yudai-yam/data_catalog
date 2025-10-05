@@ -58,6 +58,7 @@ jobs:
       - name: run the pipline
         run: |
            ./venv/bin/build
+           ls -lah
       
       - name: Check if docs/ directory exists
         run: ls -lah
