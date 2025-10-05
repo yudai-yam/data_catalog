@@ -37,8 +37,8 @@ readme = {file = ["README.rst"]}
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.setuptools.package-data]
-data_catalog = ["*.rst"]
+# [tool.setuptools.package-data]
+# data_catalog = ["*.rst"]
 
 [project.optional-dependencies]
 extract = [
