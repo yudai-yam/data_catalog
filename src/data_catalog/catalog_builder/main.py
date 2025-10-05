@@ -29,7 +29,7 @@ def build():
     write_index(rst_dir)
 
     logging.info(f"Input directory: {inputs_dir}")
-    logging.info(f"Input paths: {input_paths}")
+    logging.info(f"Input paths: {inputs_dir.glob("*")}")
 
     # iterate through inputs, each db
     for input_path in input_paths:
