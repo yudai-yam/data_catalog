@@ -34,6 +34,12 @@ dev = "data_catalog.main:dev"
 [tool.setuptools.dynamic]
 readme = {file = ["README.rst"]}
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+data_catalog = ["templates/*.rst"]
+
 [project.optional-dependencies]
 extract = [
 #    "ride-interfaces-services==0.6.0",
