@@ -59,9 +59,6 @@ jobs:
         run: |
            ./venv/bin/build
       
-      - name: Check if docs/ directory exists
-        run: ls -lah .venv/lib/python3.12/site-packages/
-      
       - name: Debug output structure
         run: |
           echo "Current directory: $(pwd)"
