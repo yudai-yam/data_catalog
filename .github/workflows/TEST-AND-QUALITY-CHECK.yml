@@ -59,6 +59,8 @@ jobs:
       - name: run the pipline
         run: |
             build
+        env:
+            INPUT_DIR: inputs
       
       - name: Debug output structure
         run: |
