@@ -23,13 +23,12 @@ def build():
 
     logging.info("Building RST files")
 
-    input_paths = list(inputs_dir.rglob("*.json"))
+    input_paths = list(inputs_dir.rglob("*"))
 
     write_inputs(input_paths, rst_dir)
     write_index(rst_dir)
 
     logging.info(f"Input directory: {inputs_dir}")
-    logging.info(f"Input paths: {str(inputs_dir.glob(" * "))}")
 
     # iterate through inputs, each db
     for input_path in input_paths:
