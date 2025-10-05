@@ -58,7 +58,7 @@ jobs:
 
       - name: run the pipline
         run: |
-            build
+            dev
         env:
             INPUT_DIR: inputs
       
