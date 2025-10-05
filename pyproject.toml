@@ -29,7 +29,7 @@ dev = "data_catalog.main:dev"
 
 
 [project.urls]  # Optional
-"Homepage" = "https://github.com/yudai-yam/data_catalog"
+"Homepage" = "https://yudai-yam.github.io/data_catalog/"
 
 [tool.setuptools.dynamic]
 readme = {file = ["README.rst"]}
