@@ -58,10 +58,9 @@ jobs:
       - name: run the pipline
         run: |
            ./venv/bin/build
-           ls -lah
       
       - name: Check if docs/ directory exists
-        run: ls -lah
+        run: ls -lah .venv/lib/python3.12/site-packages/
           
       - name: Upload the page to artifact
         uses: actions/upload-pages-artifact@v3
