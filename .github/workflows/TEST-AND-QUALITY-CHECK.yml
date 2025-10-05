@@ -40,7 +40,7 @@ jobs:
           pip install ".[dev, tox]"
       
       - name: ls
-        run: ls -lah
+        run: ls -lah inputs/
 
       - name: run black
         run: | 
