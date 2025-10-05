@@ -1,5 +1,5 @@
-from pathlib import Path
 import os
+from pathlib import Path
 
 inputs_dir = Path(os.getenv("input_dir", "inputs")).resolve()
 rst_dir = Path(__file__).parents[3] / "rst_source"
