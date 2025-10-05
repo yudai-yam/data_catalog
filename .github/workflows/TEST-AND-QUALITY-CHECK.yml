@@ -58,12 +58,11 @@ jobs:
       - name: run the pipline
         run: |
            ./venv/bin/build
+           ls -lah
       
       - name: Debug output structure
         run: |
           echo "Current directory: $(pwd)"
-          echo "Listing everything recursively:"
-          ls -R
           
       - name: Upload the page to artifact
         uses: actions/upload-pages-artifact@v3
