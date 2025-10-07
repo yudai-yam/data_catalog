@@ -1,10 +1,10 @@
 import os
 from pathlib import Path
 
-from ride_interfaces_services.configuration.app_configuration import AppConfiguration
-from ride_interfaces_services.interface.adapters.sqlalchemy_connector.connector import (
-    create_engine_for_bdwh,
-)
+# from ride_interfaces_services.configuration.app_configuration import AppConfiguration
+# from ride_interfaces_services.interface.adapters.sqlalchemy_connector.connector import (
+#     create_engine_for_bdwh,
+# )
 from sqlalchemy.orm import sessionmaker
 
 inputs_folder = Path(__file__).parents[2] / "inputs"
@@ -29,18 +29,18 @@ def read_config() -> AppConfiguration:
     config = AppConfiguration()
 
     config["engine"] = create_engine_for_bdwh(
-        username=os.getenv("BDWH_USER"),
-        password=os.getenv("BDWH_PASSWORD"),
-        host=os.getenv("BDWH_HOST"),
-        port=os.getenv("BDWH_PORT"),
-        service_name=os.getenv("BDWH_SERVICE_NAME"),
+        username=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT"),
+        service_name=os.getenv("DB_SERVICE_NAME"),
     )
 
     config["connection"] = config["engine"].connect()
 
     config["session"] = sessionmaker(config["connection"])()
 
-    config.add_parameter_from_env("bdwh_owner", "BDWH_OWNER", sanitize_schema)
+    config.add_parameter_from_env("DB_owner", "DB_OWNER", sanitize_schema)
 
     config["db_name"] = os.getenv("DB_NAME")
 
