@@ -19,7 +19,7 @@ The whole pipeline is shown in the image below.
 .. image:: pipeline.png
     :width: 800
 
-The first three steps, namely Inputs, Conversion Layer, and json inputs are to be taken care of outside of
+The first three steps, namely Inputs, Conversion Layer, and json inputs are to be taken care of outside
 this data catalog program.
 
 Project Structure

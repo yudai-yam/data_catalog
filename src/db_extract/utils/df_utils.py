@@ -8,7 +8,7 @@ from db_extract.config import allowed_table_prefixes
 def separate(df: pd.DataFrame) -> dict:
     """
     separate a df based on the prefix of the table
-    ex. BDWH_RISK and BDWH_ERS
+    ex. BDWH_RISK_ and BDWH_ERS_
 
     Args:
         df: original dataframe for a whole db

@@ -41,14 +41,14 @@ def extract():
             "all_col_comments",
             schema,
             config["connection"],
-            config["bdwh_owner"],
+            config["db_owner"],
         )
 
         result_column_types = db_utils.extract_and_query_table(
             "all_tab_columns",
             schema,
             config["connection"],
-            config["bdwh_owner"],
+            config["db_owner"],
         )
 
         columns_df = pd.merge(
@@ -64,7 +64,7 @@ def extract():
             "all_tab_comments",
             schema,
             config["connection"],
-            config["bdwh_owner"],
+            config["db_owner"],
         )
         # separate dfs based on the prefix of the table name (ex. ERS & DAL)
         overviews_df_dict = df_utils.separate(overviews_df)
