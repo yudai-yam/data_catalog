@@ -1,4 +1,5 @@
 import logging
+from typing import Optional
 
 import pandas as pd
 
@@ -51,3 +52,23 @@ def sanitize_table_name(table_name: str) -> str:
         name of the table with lower case characters
     """
     return table_name.lower()
+
+
+def create_dummy_engine(
+    username: Optional[str] = "username",
+    password: Optional[str] = "password",
+    host: Optional[str] = "host",
+    port: Optional[str] = "port",
+    service_name: Optional[str] = "service_name",
+):
+    """
+    Create a dummy engine for testing purpose
+
+    Args:
+        username: username for the db
+        password: password for the db
+        host: host of the db
+        port: port of the db
+        service_name: service name of the db
+    """
+    return "oracle+oracledb://{username}:{password}@{host}:{port}/?service_name={service_name}"
