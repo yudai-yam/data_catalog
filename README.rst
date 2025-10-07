@@ -86,7 +86,7 @@ To perform an extraction from DB, make sure to install extract dependency as wel
 
 .. code-block::
 
-    pip install -e .[dev,extract]
+    pip install -e ."[dev,extract]""
 
 Execute the job
 ------------
