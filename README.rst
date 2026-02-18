@@ -22,6 +22,9 @@ The whole pipeline is shown in the image below.
 The first three steps, namely Inputs, Conversion Layer, and json inputs are to be taken care of outside
 this data catalog program.
 
+The webpage for the data catalog is generated and hosted using GitHub Pages.
+This event is triggered when a PR is merged to the master branch.
+
 Project Structure
 -----------------
 
@@ -83,7 +86,7 @@ To perform an extraction from DB, make sure to install extract dependency as wel
 
 .. code-block::
 
-    pip install -e .[dev,extract]
+    pip install -e ."[dev,extract]""
 
 Execute the job
 ------------
@@ -95,13 +98,14 @@ Build RST files and generate HTML files under docs based on the json files in th
 
 Data Extraction from DB
 ------------
-Extract data from BDWH DB as a JSON file.
+Extract data from DB as a JSON file.
 
 .. code-block::
 
-    extract_bdwh
+    extract_db
 
 Build RST files using the extracted data
+Note that this is a demo script and is not fully functioning.
 ------------
 Build RST files based on the extracted data stored in the `inputs directory`_.
 

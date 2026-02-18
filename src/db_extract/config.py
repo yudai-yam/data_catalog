@@ -1,10 +1,9 @@
 import logging
 import os
 from pathlib import Path
+from typing import Optional
 
 from sqlalchemy.orm import sessionmaker
-
-from db_extract.utils.db_utils import create_dummy_engine
 
 inputs_folder = Path(__file__).parents[2] / "inputs"
 
@@ -72,3 +71,23 @@ def sanitize_schema(value: str) -> str:
     """
     # lowercase schema leads to no results in the queries in regression_config.py
     return value.upper()
+
+
+def create_dummy_engine(
+    username: Optional[str] = "username",
+    password: Optional[str] = "password",
+    host: Optional[str] = "host",
+    port: Optional[str] = "port",
+    service_name: Optional[str] = "service_name",
+):
+    """
+    Create a dummy engine for testing purpose
+
+    Args:
+        username: username for the db
+        password: password for the db
+        host: host of the db
+        port: port of the db
+        service_name: service name of the db
+    """
+    return "oracle+oracledb://{username}:{password}@{host}:{port}/?service_name={service_name}"

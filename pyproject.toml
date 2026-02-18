@@ -43,8 +43,6 @@ data_catalog = ["templates/*.rst"]
 [project.optional-dependencies]
 extract = [
     "sqlalchemy==2.0.43",
-#    "ride-interfaces-services==0.6.0",
-#    "oracledb==2.4.1",
 ]
 dev = [
     "data_catalog[tox]",
