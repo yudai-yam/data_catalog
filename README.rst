@@ -105,6 +105,7 @@ Extract data from DB as a JSON file.
     extract_db
 
 Build RST files using the extracted data
+Note that this is a demo script and is not fully functioning.
 ------------
 Build RST files based on the extracted data stored in the `inputs directory`_.
 
